@@ -1,0 +1,1978 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dube STEM Mastery - Making Maths & Science Make Sense</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS for Dube STEM Mastery */
+
+        :root {
+            --primary-color: #2c3e50; /* Deep Slate Blue/Grey - NEW COLOR */
+            --secondary-color: #007bff; /* Bright Blue */
+            --accent-color: #28a745; /* Green for success/CTA */
+            --text-dark: #333;
+            --text-light: #f4f4f4;
+            --bg-light: #ffffff;
+            --bg-dark: #f8f9fa; /* Very light grey/blue tint */
+            --shadow-light: rgba(0, 0, 0, 0.1);
+            --chat-primary: #e3f2fd;
+            --chat-secondary: #f5f5f5;
+        }
+
+        /* Base Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-dark); /* Overall very light background */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px; /* Default container padding */
+        }
+
+        h1, h2, h3 {
+            font-family: 'Roboto Slab', serif;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-size: 2.2em;
+        }
+
+        h2 {
+            font-size: 1.8em;
+        }
+
+        h3 {
+            font-size: 1.4em;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        a {
+            color: var(--secondary-color);
+            text-decoration: none;
+        }
+
+            a:hover {
+                text-decoration: underline;
+            }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--text-light);
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+
+            .btn:hover {
+                background-color: #218838; /* Darker green */
+                text-decoration: none;
+            }
+
+        /* Header */
+        header {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            padding: 15px 0; /* Reduced vertical padding slightly for taskbar feel */
+            box-shadow: 0 2px 5px var(--shadow-light);
+            position: sticky; /* Makes header stick to top */
+            top: 0;
+            z-index: 1000; /* Ensures it stays on top of other content */
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between; /* Pushes brand to left, nav to right */
+            align-items: center; /* Vertically centers items */
+            padding: 0 20px; /* Adjust padding for container to remove default */
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px; /* Space between logo and text */
+        }
+
+        .header-logo {
+            max-width: 60px; /* Smaller logo for taskbar */
+            height: auto;
+            /*filter: brightness(0) invert(1); Makes a colored logo white for dark backgrounds */
+        }
+
+        header .logo {
+            font-size: 1.8em; /* Smaller font for taskbar */
+            font-weight: 700;
+            margin: 0;
+            text-shadow: none; /* Remove text shadow for cleaner look */
+            white-space: nowrap; /* Keep logo text on one line */
+        }
+
+        .main-nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex; /* Horizontal navigation */
+            gap: 20px; /* Space between nav items */
+        }
+
+        .main-nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+            padding: 5px 0; /* Add some clickable area */
+        }
+
+            .main-nav a:hover {
+                color: var(--secondary-color); /* Highlight color on hover */
+                text-decoration: none;
+            }
+
+        /* Hero Section */
+        .hero {
+            background-color: var(--bg-light); /* Changed to white background */
+            color: var(--text-dark); /* Changed text to dark for contrast */
+            text-align: center;
+            padding: 80px 20px;
+            box-shadow: inset 0 -5px 10px rgba(0,0,0,0.05); /* Lighter shadow */
+            display: block; /* Ensure it's visible */
+        }
+
+            .hero h1 {
+                color: var(--primary-color); /* Heading is dark blue */
+                font-size: 2.8em;
+                margin-bottom: 20px;
+                line-height: 1.2;
+            }
+
+            .hero p {
+                font-size: 1.2em;
+                max-width: 800px;
+                margin: 0 auto 30px;
+                color: var(--text-dark); /* Ensure paragraph text is dark */
+            }
+        /* CSS for the hero image */
+        .hero-image {
+            max-width: 100%; /* Ensure responsiveness */
+            height: auto;
+            margin-bottom: 30px; /* Space between image and heading */
+            border-radius: 8px; /* Slightly rounded corners */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+
+        /* Section Styling */
+        section {
+            background-color: var(--bg-light);
+            padding: 60px 0;
+            border-bottom: 1px solid #eee;
+            display: block; /* Ensure sections are visible */
+        }
+
+            section:nth-of-type(even) {
+                background-color: var(--bg-dark);
+            }
+
+        /* About Section */
+        .about-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            text-align: center;
+        }
+
+            .about-content img {
+                width: 180px;
+                height: 180px;
+                border-radius: 50%;
+                object-fit: cover;
+                border: 5px solid var(--secondary-color);
+                box-shadow: 0 5px 15px var(--shadow-light);
+            }
+
+            .about-content .bio p {
+                font-size: 1.1em;
+                max-width: 700px;
+                margin: 0 auto;
+            }
+
+            .about-content .achievements span {
+                display: block;
+                background-color: var(--secondary-color);
+                color: var(--text-light);
+                padding: 8px 15px;
+                border-radius: 20px;
+                margin: 10px auto;
+                width: fit-content;
+                font-weight: 600;
+                font-size: 0.95em;
+            }
+
+            .about-content .achievements {
+                margin-top: 20px;
+            }
+
+                .about-content .achievements h3 {
+                    color: var(--text-dark); /* Achievements heading color */
+                    font-size: 1.3em;
+                }
+
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr; /* Single column on small screens */
+            gap: 30px;
+        }
+
+        .service-item {
+            background-color: var(--bg-light);
+            border-radius: 8px;
+            box-shadow: 0 4px 10px var(--shadow-light);
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            .service-item:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            }
+
+            .service-item h3 {
+                color: var(--primary-color);
+                margin-bottom: 10px;
+            }
+
+            .service-item ul {
+                list-style: none;
+                padding: 0;
+                text-align: left;
+                max-width: 300px;
+                margin: 15px auto 0;
+            }
+
+                .service-item ul li {
+                    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="%2328a745" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle"><path d="M22 11.08V12a10 10 0 1 1-5.93-8.13"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>') no-repeat left center;
+                    background-size: 20px;
+                    padding-left: 30px;
+                    margin-bottom: 8px;
+                }
+
+
+        /* Why Choose Us Section */
+        .why-choose-us .grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+        }
+
+        .why-item {
+            background-color: var(--bg-light);
+            padding: 25px;
+            border-left: 4px solid var(--secondary-color);
+            box-shadow: 0 2px 8px var(--shadow-light);
+            border-radius: 5px;
+        }
+
+            .why-item h3 {
+                color: var(--primary-color);
+                margin-top: 0;
+            }
+
+        /* Pricing Section */
+        .pricing-content {
+            text-align: center;
+        }
+
+            .pricing-content ul {
+                list-style: none;
+                padding: 0;
+                max-width: 500px;
+                margin: 20px auto;
+            }
+
+                .pricing-content ul li {
+                    background-color: var(--bg-light);
+                    margin-bottom: 10px;
+                    padding: 15px 20px;
+                    border-radius: 8px;
+                    box-shadow: 0 2px 5px var(--shadow-light);
+                    text-align: left;
+                    display: flex;
+                    align-items: center;
+                    gap: 15px;
+                }
+
+                    .pricing-content ul li::before {
+                        content: '•'; /* Simple bullet point */
+                        color: var(--accent-color);
+                        font-size: 1.5em;
+                        line-height: 1;
+                    }
+
+
+        /* Testimonials Section */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .testimonial-item {
+            background-color: var(--bg-light);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px var(--shadow-light);
+            font-style: italic;
+            position: relative;
+            text-align: center;
+        }
+
+            .testimonial-item::before {
+                content: "“";
+                font-size: 4em;
+                color: var(--secondary-color);
+                position: absolute;
+                top: 10px;
+                left: 20px;
+                opacity: 0.2;
+                line-height: 0.5;
+            }
+
+            .testimonial-item p {
+                margin-bottom: 10px;
+                padding-top: 20px; /* Space for quote mark */
+            }
+
+            .testimonial-item .author {
+                font-weight: 600;
+                color: var(--primary-color);
+                display: block;
+                margin-top: 10px;
+                font-style: normal;
+            }
+
+        /* Contact Section */
+        .contact-info {
+            text-align: center;
+            margin-bottom: 40px; /* Space above the form */
+        }
+
+            .contact-info p {
+                font-size: 1.1em;
+                margin-bottom: 10px;
+            }
+
+            .contact-info .icon {
+                display: inline-block;
+                margin-right: 10px;
+                color: var(--primary-color);
+            }
+
+            .contact-info a {
+                font-weight: 600;
+            }
+
+        /* Contact Form Styles */
+        .contact-form {
+            max-width: 600px;
+            margin: 30px auto 0;
+            padding: 25px;
+            background-color: var(--bg-light);
+            border-radius: 8px;
+            box-shadow: 0 4px 15px var(--shadow-light);
+            text-align: left; /* Align form elements to the left */
+        }
+
+            .contact-form .form-group {
+                margin-bottom: 15px;
+            }
+
+            .contact-form label {
+                display: block;
+                margin-bottom: 8px;
+                font-weight: 600;
+                color: var(--primary-color);
+            }
+
+            .contact-form input[type="text"],
+            .contact-form input[type="email"],
+            .contact-form input[type="tel"],
+            .contact-form textarea {
+                width: calc(100% - 20px); /* Account for padding */
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                font-family: 'Poppins', sans-serif;
+                font-size: 1em;
+            }
+
+            .contact-form textarea {
+                resize: vertical; /* vertical resizing */
+            }
+
+            .contact-form .btn {
+                width: 100%; /*  width button */
+                padding: 15px;
+                font-size: 1.1em;
+                cursor: pointer;
+                border: none;
+                margin-top: 10px; /* Space above button */
+            }
+
+        #form-status {
+            margin-top: 20px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.1em;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+
+        /* Media Queries for Responsiveness */
+        @media (min-width: 600px) {
+            .services-grid, .why-choose-us .grid, .testimonials-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+
+            .hero h1 {
+                font-size: 3.5em;
+            }
+
+            .about-content {
+                flex-direction: row;
+                text-align: left;
+                align-items: flex-start;
+            }
+
+                .about-content img {
+                    margin-right: 30px;
+                }
+
+                .about-content .bio {
+                    flex: 1;
+                }
+
+                .about-content .achievements {
+                    text-align: left; /* Align achievements to the left on larger screens */
+                }
+
+                    .about-content .achievements span {
+                        margin-left: 0;
+                    }
+        }
+
+        @media (min-width: 768px) {
+            /* Adjust padding for container on larger screens */
+            .container {
+                padding: 0 20px;
+            }
+        }
+
+        @media (max-width: 767px) { /* Adjust breakpoint for header responsiveness */
+            .header-content {
+                flex-direction: column; /* Stack logo and nav vertically */
+                text-align: center;
+            }
+
+            .brand {
+                margin-bottom: 15px; /* Space between brand and stacked nav */
+            }
+
+            .main-nav ul {
+                flex-direction: column; /* Stack nav items vertically */
+                gap: 10px;
+            }
+
+            .header-logo {
+                max-width: 70px; /* Slightly larger logo when stacked */
+            }
+
+            header .logo {
+                font-size: 2em; /* Slightly larger text when stacked */
+            }
+        }
+
+
+        @media (min-width: 900px) {
+            h1 {
+                font-size: 3em;
+            }
+
+            h2 {
+                font-size: 2.2em;
+            }
+
+            h3 {
+                font-size: 1.6em;
+            }
+
+            .hero h1 {
+                font-size: 4em;
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr); /* Two columns for services */
+            }
+        }
+
+        /* Basic Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+            .fade-in.appear {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        /* Contact Section Layout */
+        .contact-flex {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        .fun-card {
+            background: linear-gradient(135deg, #2c3e50 60%, #2c3e50 100%);
+            border-radius: 16px;
+            box-shadow: 0 6px 24px rgba(44,62,80,0.08), 0 1.5px 6px rgba(0,123,255,0.08);
+            padding: 32px 28px 28px 28px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 2px solid var(--secondary-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Contact Section Layout */
+        .contact-flex {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        .fun-card {
+            background: linear-gradient(135deg, #f8f9fa 60%, #e3fcec 100%);
+            border-radius: 16px;
+            box-shadow: 0 6px 24px rgba(44,62,80,0.08), 0 1.5px 6px rgba(0,123,255,0.08);
+            padding: 32px 28px 28px 28px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 2px solid var(--secondary-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+            .fun-card:hover {
+                transform: translateY(-4px) scale(1.02);
+                box-shadow: 0 12px 32px rgba(44,62,80,0.13), 0 2px 8px rgba(0,123,255,0.13);
+            }
+
+        @media (min-width: 900px) {
+            .contact-flex {
+                flex-direction: row;
+                align-items: flex-start;
+                gap: 60px;
+            }
+
+            .contact-info, #contactFormContainer {
+                flex: 1 1 0;
+                max-width: 50%;
+            }
+
+            .contact-info {
+                text-align: left;
+                margin-bottom: 0;
+            }
+
+            #contactFormContainer {
+                margin-top: 0;
+            }
+        }
+
+        /* Adding a background shape */
+        .fun-card::before {
+            content: "";
+            position: absolute;
+            top: -40px;
+            right: -40px;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle at 40% 40%, var(--secondary-color) 0%, transparent 70%);
+            opacity: 0.12;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Login/Signup Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: var(--bg-light);
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .close-modal {
+            float: right;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .auth-tab {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            cursor: pointer;
+            border-bottom: 2px solid #ddd;
+        }
+
+            .auth-tab.active {
+                border-bottom: 2px solid var(--secondary-color);
+                color: var(--secondary-color);
+                font-weight: 600;
+            }
+
+        .auth-form {
+            display: none;
+        }
+
+            .auth-form.active {
+                display: block;
+            }
+
+            .auth-form input {
+                width: 100%;
+                padding: 12px;
+                margin-bottom: 15px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                box-sizing: border-box;
+            }
+
+            .auth-form select {
+                width: 100%;
+                padding: 12px;
+                margin-bottom: 15px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                box-sizing: border-box;
+            }
+
+            .auth-form button {
+                width: 100%;
+                padding: 12px;
+                background-color: var(--accent-color);
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-weight: 600;
+            }
+
+        /* Dashboard Styles */
+        .dashboard {
+            display: none; /* Hidden by default */
+            padding: 20px;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--secondary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .dashboard-nav {
+            background-color: var(--bg-light);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px var(--shadow-light);
+        }
+
+            .dashboard-nav ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+                display: flex;
+                gap: 15px;
+            }
+
+            .dashboard-nav a {
+                color: var(--primary-color);
+                text-decoration: none;
+                padding: 8px 15px;
+                border-radius: 5px;
+                transition: background-color 0.3s;
+            }
+
+                .dashboard-nav a.active, .dashboard-nav a:hover {
+                    background-color: var(--secondary-color);
+                    color: white;
+                }
+
+        .dashboard-section {
+            display: none;
+            background-color: var(--bg-light);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px var(--shadow-light);
+            margin-bottom: 20px;
+        }
+
+            .dashboard-section.active {
+                display: block;
+            }
+
+        /* Chat Styles */
+        .chat-container {
+            display: flex;
+            height: 500px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .chat-contacts {
+            width: 30%;
+            border-right: 1px solid #ddd;
+            overflow-y: auto;
+        }
+
+        .chat-contact {
+            padding: 15px;
+            cursor: pointer;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+            .chat-contact.active, .chat-contact:hover {
+                background-color: var(--chat-primary);
+            }
+
+        .chat-messages {
+            width: 70%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-header {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+            background-color: var(--bg-dark);
+            font-weight: 600;
+        }
+
+        .chat-display {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .message {
+            max-width: 70%;
+            padding: 10px 15px;
+            border-radius: 18px;
+            margin-bottom: 10px;
+        }
+
+            .message.sent {
+                align-self: flex-end;
+                background-color: var(--secondary-color);
+                color: white;
+            }
+
+            .message.received {
+                align-self: flex-start;
+                background-color: var(--chat-secondary);
+            }
+
+        .chat-input {
+            display: flex;
+            padding: 15px;
+            border-top: 1px solid #ddd;
+            background-color: var(--bg-dark);
+        }
+
+            .chat-input input {
+                flex: 1;
+                padding: 12px;
+                border: 1px solid #ddd;
+                border-radius: 20px;
+                margin-right: 10px;
+            }
+
+            .chat-input button {
+                background-color: var(--secondary-color);
+                color: white;
+                border: none;
+                border-radius: 50%;
+                width: 40px;
+                height: 40px;
+                cursor: pointer;
+            }
+
+        /* Video Call Styles */
+        .video-call-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .video-window {
+            display: flex;
+            gap: 20px;
+            height: 400px;
+        }
+
+        .video-local, .video-remote {
+            flex: 1;
+            background-color: #000;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .video-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .video-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+            .video-btn.end-call {
+                background-color: #dc3545;
+            }
+
+        /* Scheduling Styles */
+        .scheduling-container {
+            display: flex;
+            gap: 30px;
+        }
+
+        .calendar-container {
+            flex: 1;
+        }
+
+        .scheduling-form {
+            flex: 1;
+            background-color: var(--bg-dark);
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        /* Resources Styles */
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .resource-card {
+            background-color: var(--bg-light);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px var(--shadow-light);
+            transition: transform 0.3s;
+        }
+
+            .resource-card:hover {
+                transform: translateY(-5px);
+            }
+
+        .resource-img {
+            height: 150px;
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .resource-content {
+            padding: 15px;
+        }
+
+        .resource-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .resource-desc {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .resource-link {
+            display: inline-block;
+            color: var(--secondary-color);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        /* Student Management */
+        .students-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .student-card {
+            background-color: var(--bg-light);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 5px var(--shadow-light);
+        }
+
+        .student-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: var(--secondary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            margin: 0 auto 15px;
+        }
+
+        .student-actions {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .student-btn {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+            .student-btn.remove {
+                background-color: #dc3545;
+                color: white;
+            }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .chat-container {
+                flex-direction: column;
+                height: 600px;
+            }
+
+            .chat-contacts, .chat-messages {
+                width: 100%;
+            }
+
+            .chat-contacts {
+                height: 30%;
+                border-right: none;
+                border-bottom: 1px solid #ddd;
+            }
+
+            .chat-messages {
+                height: 70%;
+            }
+
+            .scheduling-container {
+                flex-direction: column;
+            }
+
+            .video-window {
+                flex-direction: column;
+                height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container header-content">
+            <div class="brand">
+                <img src="images/dube-stem-mastery-logo.png" alt="Tutoring Hub Logo" class="header-logo">
+                <h1 class="logo">Tutoring Hub</h1>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#" id="home-link">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#services">Our Platform</a></li>
+                    <li><a href="#why-choose-us">Why Choose Us</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#" id="login-link">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero fade-in">
+            <div class="container">
+                <img src="images/hero-background.png" alt="Students and tutors collaborating online" class="hero-image">
+                <h1>Find Your Perfect Tutor. Excel in Any Subject.</h1>
+                <p>Whether you're a high school student in Grade 10, 11, or 12 aiming for distinctions, or a varsity student tackling advanced modules, Dube's Tutoring Hub is your platform for academic success. We connect you with a network of verified tutors who are ready to turn confusion into clarity and build lasting confidence. 🎓</p>
+                <a href="#services" class="btn">Find Your Tutor Today!</a>
+            </div>
+        </section>
+
+        <section id="about" class="fade-in">
+            <div class="container">
+                <h2>About us</h2>
+                <div class="about-content">
+                    <img src="images/tutoring-hub-team.png" alt="Tutoring Hub Team">
+                    <div class="bio">
+                        <p><strong>Tutoring Hub</strong> is a South African-based academic support platform dedicated to empowering learners from high school to university. Supported by a team of educators, developers, and curriculum specialists, our mission is to make STEM subjects accessible, engaging, and achievable for all students.</p>
+                        <p>We believe that every learner deserves personalized guidance, and every tutor deserves a platform to share their expertise. Tutoring Hub bridges this gap by offering live video sessions, AI-powered homework help, and tailored academic tracking—all in one place. Whether you're preparing for NSC exams or tackling varsity modules, our platform is built to support your journey.</p>
+                        <div class="achievements">
+                            <h3>What Sets Us Apart:</h3>
+                            <span>Expert Tutors with Proven Academic Records</span>
+                            <span>Support for High School & University Students</span>
+                            <span>AI-Enhanced Learning Tools</span>
+                            <span>Flexible Online & In-Person Tutoring Options</span>
+                            <span>Community-Driven Approach to Education</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="services" class="fade-in">
+            <div class="container">
+                <h2>Our Platform: Connecting Tutors and Students</h2>
+                <div class="services-grid">
+                    <div class="service-item">
+                        <h3>Find Your Tutor</h3>
+                        <p>Explore a diverse network of verified tutors for high school and university subjects.</p>
+                        <ul>
+                            <li>Browse by Subject (Maths, Physics, Chemistry, etc.)</li>
+                            <li>Filter by Academic Level (Grades 10-12, Varsity)</li>
+                            <li>Read Tutor Profiles & Reviews</li>
+                            <li>Connect with Experts in Your Field</li>
+                        </ul>
+                    </div>
+                    <div class="service-item">
+                        <h3>Seamless Scheduling</h3>
+                        <p>Manage all your tutoring sessions with our easy-to-use scheduling tools.</p>
+                        <ul>
+                            <li>Book Sessions Directly with Tutors</li>
+                            <li>View Real-Time Tutor Availability</li>
+                            <li>Get Automated Session Reminders</li>
+                            <li>Flexible Rescheduling Options</li>
+                        </ul>
+                    </div>
+                    <div class="service-item">
+                        <h3>Integrated Learning Tools</h3>
+                        <p>Learn effectively with our full suite of built-in online features.</p>
+                        <ul>
+                            <li>High-Quality Live Video Calls</li>
+                            <li>Interactive Whiteboards</li>
+                            <li>Secure Chat for Quick Questions</li>
+                            <li>Shared Document Spaces</li>
+                        </ul>
+                    </div>
+                    <div class="service-item">
+                        <h3>Secure & Transparent Payments</h3>
+                        <p>Pay for sessions securely through the platform, with no hidden fees.</p>
+                        <ul>
+                            <li>Tutors Set Their Own Rates</li>
+                            <li>Flexible Hourly & Package Options</li>
+                            <li>Simple and Secure Payment Gateway</li>
+                            <li>Transparent Invoicing</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="why-choose-us" class="fade-in">
+            <div class="container">
+                <h2>Why Choose Our Tutoring Hub?</h2>
+                <div class="why-choose-us grid">
+                    <div class="why-item">
+                        <h3>Verified Tutors</h3>
+                        <p>Our platform verifies every tutor's credentials and academic background to ensure you receive high-quality, reliable instruction.</p>
+                    </div>
+                    <div class="why-item">
+                        <h3>Deep Understanding Guaranteed</h3>
+                        <p>Our tutors go beyond rote memorization, ensuring you truly grasp complex concepts from their foundation.</p>
+                    </div>
+                    <div class="why-item">
+                        <h3>Personalized & Engaging Lessons</h3>
+                        <p>Tutors on our platform tailor their approach to your unique learning style, making sessions effective and enjoyable. 🤩</p>
+                    </div>
+                    <div class="why-item">
+                        <h3>Boost Your Confidence</h3>
+                        <p>Gain the self-assurance needed to tackle challenging problems and excel in your exams and assignments.</p>
+                    </div>
+                    <div class="why-item">
+                        <h3>Achieve Your Academic Goals</h3>
+                        <p>Whether you're aiming to catch up, improve your grades, or secure a university entrance, our tutors help you get there.</p>
+                    </div>
+                    <div class="why-item">
+                        <h3>Local & Online Tutors</h3>
+                        <p>Connect with a wide network of tutors, including those offering convenient online sessions from anywhere and in-person tutoring in select locations.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pricing" class="fade-in">
+            <div class="container">
+                <h2>Flexible Pricing Options</h2>
+                <div class="pricing-content">
+                    <p>Tutors on our platform set their own competitive rates. Our pricing model is designed to make quality education accessible. Your first **15-minute consultation with a new tutor is often free!**</p>
+                    <ul>
+                        <li>**Hourly Rates:** Pay per session for premium, personalized attention.</li>
+                        <li>**Group Sessions:** Collaborate with peers for a cost-effective learning experience.</li>
+                        <li>**Custom Packages:** Many tutors offer packages for long-term support.</li>
+                    </ul>
+                    <p>Browse tutor profiles and find the perfect fit for your budget and needs. </p>
+                    <a href="#services" class="btn">Browse Tutors Now!</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials" class="fade-in">
+            <div class="container">
+                <h2> What Our Tutors & Students Say</h2>
+                <div class="testimonials-grid">
+                    <div class="testimonial-item">
+                        <p>
+                            I found a fantastic Physics tutor on this platform who helped me understand the topics I was struggling with. My marks improved dramatically, and I even started enjoying the subject!
+                        </p>
+                        <span class="author">— Thando M., Varsity Student</span>
+                    </div>
+                    <div class="testimonial-item">
+                        <p>
+                            As a tutor Tutoring Hub has been a game-changer. I have a steady stream of students, and the platform handles all the scheduling and payments. It's so easy to manage my tutoring business.
+                        </p>
+                        <span class="author">— Mr. Nkosi, Verified Tutor</span>
+                    </div>
+                    <div class="testimonial-item">
+                        <p>
+                            This platform made it simple to find a great math tutor for my daughter. I appreciate the transparency of the tutor profiles and the easy communication tools. Highly recommended for parents.
+                        </p>
+                        <span class="author">— Mrs. Nkosi, Parent</span>
+                    </div>
+                    <div class="testimonial-item">
+                        <p>
+                            The online video call and whiteboard features are excellent. My tutor and I can solve problems together in real-time, making my sessions just as effective as being in person.
+                        </p>
+                        <span class="author">— Sipho D., Grade 10 Student</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="contact" class="fade-in">
+            <div class="container">
+                <h2>
+                    <span style="font-size:1.3em;vertical-align:middle;">✉️</span>
+                    Ready to Find Your Perfect Tutor?
+                </h2>
+                <div class="contact-flex">
+                    <div class="contact-info fun-card">
+                        <h3 style="margin-top:0;font-size:1.4em;color:var(--secondary-color);">
+                            <span style="font-size:1.2em;">🤝</span> Let's Connect!
+                        </h3>
+                        <p>Get in touch with our support team if you have any questions or need assistance with the platform.</p>
+                        <p><span class="icon">📞</span> <strong>Phone/WhatsApp:</strong> <a href="tel:+27635321092">+27 635321092</a></p>
+                        <p><span class="icon">📧</span> <strong>Email:</strong> <a href="mailto:msiguqu@gmail.com">support@tutoringhub.com</a></p>
+                        <p><span class="icon">⏰</span> <strong>Support Hours:</strong> Mon-Fri: 9 AM - 5 PM</p>
+                        <p><span class=" icon">📍</span> <strong>Platform:</strong> Online Tutoring Marketplace</p>
+                        <p>Follow us on <a href="[Your Facebook Page Link]" target="_blank">Facebook</a> for tips and updates!</p>
+                    </div>
+
+                    <div id="contactFormContainer" class="fun-card">
+                        <h3 style="margin-top:0;font-size:1.2em;color:var(--secondary-color);">
+                            <span style="font-size:1.2em;"></span> Send Us a Message
+                        </h3>
+                        <form id="contact-form" action="https://formspree.io/f/xrbkprno" method="POST" class="contact-form">
+                            <div class="form-group">
+                                <label for="name">Your Name:</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Your Email:</label>
+                                <input type="email" id="email" name="_replyto" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number (Optional):</label>
+                                <input type="tel" id="phone" name="phone">
+                            </div>
+                            <div class="form-group">
+                                <label for="subject">Subject:</label>
+                                <input type="text" id="subject" name="_subject" value="New Tutoring Hub Inquiry" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Your Message:</label>
+                                <textarea id="message" name="message" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="btn">🚀 Send Message</button>
+                        </form>
+                        <p id="form-status" style="margin-top: 20px; text-align: center; font-weight: 600;"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+            <div id="auth-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close-modal">&times;</span>
+                    <div class="auth-tabs">
+                        <div class="auth-tab active" data-tab="login">Login</div>
+                        <div class="auth-tab" data-tab="signup">Sign Up</div>
+                    </div>
+
+                    <form id="login-form" class="auth-form active">
+                        <input type="email" placeholder="Email" required>
+                        <input type="password" placeholder="Password" required>
+                        <button type="submit">Login</button>
+                    </form>
+
+                    <form id="signup-form" class="auth-form">
+                        <input type="text" placeholder="Full Name" required>
+                        <input type="email" placeholder="Email" required>
+                        <input type="password" placeholder="Password" required>
+                        <select id="user-role" required>
+                            <option value="">Select Role</option>
+                            <option value="student">Student</option>
+                            <option value="tutor">Tutor</option>
+
+                        </select>
+                        <button type="submit">Sign Up</button>
+                    </form>
+                </div>
+            </div>
+
+            <div id="dashboard" class="dashboard container">
+                style="display:none;">
+                <div class="dashboard-header">
+                    <h2>Welcome, <span id="user-name">User</span>!</h2>
+                    <div class="user-info">
+                        <div class="user-avatar" id="user-avatar">U</div>
+                        <button id="logout-btn" class="btn">Logout</button>
+                    </div>
+                </div>
+
+                <nav class="dashboard-nav">
+                    <ul>
+                        <li><a href="#dashboard-home" class="nav-link active">Dashboard</a></li>
+                        <li><a href="#chat-section" class="nav-link">Chat</a></li>
+                        <li><a href="#video-call" class="nav-link">Video Call</a></li>
+                        <li><a href="#schedule" class="nav-link">Schedule</a></li>
+                        <li><a href="#resources" class="nav-link">Resources</a></li>
+                        <li id="student-management-link" style="display:none;"><a href="#student-management" class="nav-link">Students</a></li>
+                    </ul>
+                </nav>
+
+                <div id="dashboard-home" class="dashboard-section active">
+                    <h3>Your Dashboard</h3>
+                    <p>Welcome to your personalized dashboard. Use the navigation above to access different features.</p>
+                    <div id="dashboard-content">
+                    </div>
+                </div>
+
+                <div id="chat-section" class="dashboard-section">
+                    <h3>Chat</h3>
+                    <div class="chat-container">
+                        <div class="chat-contacts">
+                            <div class="chat-contact active">
+                                <div class="user-avatar">T</div>
+                                <div>Your Tutor</div>
+                            </div>
+                            <div class="chat-contact">
+                                <div class="user-avatar">S</div>
+                                <div>Sarah (Student)</div>
+                            </div>
+                        </div>
+                        <div class="chat-messages">
+                            <div class="chat-header">
+                                Your Tutor
+                            </div>
+                            <div class="chat-display">
+                                <div class="message received">
+                                    Hello! How can I help you with your math homework today?
+                                </div>
+                                <div class="message sent">
+                                    I'm having trouble with calculus problems.
+                                </div>
+                                <div class="message received">
+                                    No problem! Let's schedule a session to go through it together.
+                                </div>
+                            </div>
+                            <div class="chat-input">
+                                <input type="text" placeholder="Type your message...">
+                                <button><i class="fas fa-paper-plane"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="video-call" class="dashboard-section">
+                    <h3>Video Call</h3>
+                    <div class="video-call-container">
+                        <div class="video-window">
+                            <div class="video-local">
+                                <div style="color:white; text-align:center; padding-top:180px;">Your Video</div>
+                            </div>
+                            <div class="video-remote">
+                                <div style="color:white; text-align:center; padding-top:180px;">Tutor's Video</div>
+                            </div>
+                        </div>
+                        <div class="video-controls">
+                            <button class="video-btn"><i class="fas fa-video"></i></button>
+                            <button class="video-btn"><i class="fas fa-microphone"></i></button>
+                            <button class="video-btn end-call"><i class="fas fa-phone-slash"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="schedule" class="dashboard-section">
+                    <h3>Schedule a Session</h3>
+                    <div class="scheduling-container">
+                        <div class="calendar-container">
+                            <div id="calendar" style="background:#f9f9f9; padding:20px; border-radius:8px; text-align:center;">
+                                <p>Calendar will be displayed here</p>
+                            </div>
+                        </div>
+                        <div class="scheduling-form">
+                            <h4>Book a Session</h4>
+                            <form>
+                                <input type="text" placeholder="Select Tutor" style="width:100%; margin-bottom:15px; padding:10px;">
+                                <input type="datetime-local" style="width:100%; margin-bottom:15px; padding:10px;">
+                                <textarea placeholder="Notes" style="width:100%; height:100px; margin-bottom:15px; padding:10px;"></textarea>
+                                <button type="submit" class="btn" style="width:100%;">Schedule Session</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="resources" class="dashboard-section">
+                    <h3>Recommended Resources</h3>
+                    <div class="resources-grid">
+                        <div class="resource-card">
+                            <div class="resource-img">
+                                <i class="fas fa-book" style="font-size:3em; color:#666;"></i>
+                            </div>
+                            <div class="resource-content">
+                                <div class="resource-title">Calculus Fundamentals</div>
+                                <div class="resource-desc">A comprehensive guide to understanding basic calculus concepts</div>
+                                <a href="#" class="resource-link">View Resource</a>
+                            </div>
+                        </div>
+                        <div class="resource-card">
+                            <div class="resource-img">
+                                <i class="fas fa-video" style="font-size:3em; color:#666;"></i>
+                            </div>
+                            <div class="resource-content">
+                                <div class="resource-title">Physics Problem Solving</div>
+                                <div class="resource-desc">Video series on approaching complex physics problems</div>
+                                <a href="#" class="resource-link">Watch Videos</a>
+                            </div>
+                        </div>
+                        <div class="resource-card">
+                            <div class="resource-img">
+                                <i class="fas fa-file-pdf" style="font-size:3em; color:#666;"></i>
+                            </div>
+                            <div class="resource-content">
+                                <div class="resource-title">Past Exam Papers</div>
+                                <div class="resource-desc">Collection of past papers with detailed solutions</div>
+                                <a href="#" class="resource-link">Download</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="student-management" class="dashboard-section">
+                    <h3>Student Management</h3>
+                    <div class="students-grid">
+                        <div class="student-card">
+                            <div class="student-avatar">S</div>
+                            <h4>Sarah Johnson</h4>
+                            <p>Grade 11 Mathematics</p>
+                            <div class="student-actions">
+                                <button class="student-btn remove">Remove</button>
+                                <button class="student-btn">Message</button>
+                            </div>
+                        </div>
+                        <div class="student-card">
+                            <div class="student-avatar">J</div>
+                            <h4>John Smith</h4>
+                            <p>Grade 10 Physical Sciences</p>
+                            <div class="student-actions">
+                                <button class="student-btn remove">Remove</button>
+                                <button class="student-btn">Message</button>
+                            </div>
+                        </div>
+                        <div class="student-card">
+                            <div class="student-avatar">M</div>
+                            <h4>Mary Williams</h4>
+                            <p>Grade 12 Mathematics</p>
+                            <div class="student-actions">
+                                <button class="student-btn remove">Remove</button>
+                                <button class="student-btn">Message</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <footer>
+            <div class="container">
+                <p>&copy; <span id="current-year"></span> Dube STEM Mastery. All Rights Reserved.</p>
+            </div>
+        </footer>
+
+        <script>
+            // JavaScript for authentication and dashboard functionality
+
+            // DOM Elements
+            const authModal = document.getElementById('auth-modal');
+            const loginLinks = document.querySelectorAll('a#login-link'); // Correctly select ALL login links
+            const closeModal = document.querySelector('.close-modal');
+            const authTabs = document.querySelectorAll('.auth-tab');
+            const authForms = document.querySelectorAll('.auth-form');
+            const dashboard = document.getElementById('dashboard');
+            const homeLink = document.getElementById('home-link');
+            const logoutBtn = document.getElementById('logout-btn');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const dashboardSections = document.querySelectorAll('.dashboard-section');
+            const userAvatar = document.getElementById('user-avatar');
+            const userName = document.getElementById('user-name');
+            const studentManagementLink = document.getElementById('student-management-link');
+            const dashboardContent = document.getElementById('dashboard-content');
+            const mainContentSections = document.querySelectorAll('main > section, footer');
+
+            // Current user state (in a real app, this would come from backend)
+            let currentUser = null;
+
+            // Show modal when login link is clicked
+            loginLinks.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    authModal.style.display = 'flex';
+                });
+            });
+
+            // Close modal when X is clicked
+            closeModal.addEventListener('click', function () {
+                authModal.style.display = 'none';
+            });
+
+            // Switch between login and signup tabs
+            authTabs.forEach(tab => {
+                tab.addEventListener('click', function () {
+                    const tabId = this.getAttribute('data-tab');
+
+                    // Update active tab
+                    authTabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+
+                    // Show corresponding form
+                    authForms.forEach(form => {
+                        form.classList.remove('active');
+                        if (form.id === `${tabId}-form`) {
+                            form.classList.add('active');
+                        }
+                    });
+                });
+            });
+
+            // Handle login form submission
+            document.getElementById('login-form').addEventListener('submit', function (e) {
+                e.preventDefault();
+                // In a real app, this would verify credentials with a backend
+                const email = this.querySelector('input[type="email"]').value;
+                const password = this.querySelector('input[type="password"]').value;
+
+                // Simulate login - in a real app, this would be an API call
+                simulateLogin(email, password);
+            });
+
+            // Handle signup form submission
+            document.getElementById('signup-form').addEventListener('submit', function (e) {
+                e.preventDefault();
+                const name = this.querySelector('input[type="text"]').value;
+                const email = this.querySelector('input[type="email"]').value;
+                const password = this.querySelector('input[type="password"]').value;
+                const role = document.getElementById('user-role').value;
+
+                // Simulate signup - in a real app, this would be an API call
+                simulateSignup(name, email, password, role);
+            });
+
+            // Simulate login process
+            function simulateLogin(email, password) {
+                let role;
+
+                // Admin: fixed login
+                if (email.toLowerCase() === "mrdube@system.com" && password === "MasterDube123") {
+                    role = "admin";
+                }
+                else if (email.includes("tutor")) {
+                    role = "tutor";
+                }
+                else {
+                    role = "student";
+                }
+
+                currentUser = {
+                    name: email.split('@')[0],
+                    email: email,
+                    role: role,
+                    avatar: email.charAt(0).toUpperCase()
+                };
+
+                // Update UI
+                userAvatar.textContent = currentUser.avatar;
+                userName.textContent = currentUser.name;
+                authModal.style.display = 'none';
+                dashboard.style.display = 'block';
+
+                // Hide main website content
+                mainContentSections.forEach(el => {
+                    el.style.display = 'none';
+                });
+
+                // Show/hide features based on role
+                if (currentUser.role === 'admin' || currentUser.role === 'tutor') {
+                    studentManagementLink.style.display = 'block';
+                } else {
+                    studentManagementLink.style.display = 'none';
+                }
+
+                loadDashboardContent();
+            }
+
+
+            // Simulate signup process
+            function simulateSignup(name, email, password, role) {
+
+                currentUser = {
+                    name: name,
+                    email: email,
+                    role: role,
+                    avatar: name.charAt(0).toUpperCase()
+                };
+
+                // Update UI
+                userAvatar.textContent = currentUser.avatar;
+                userName.textContent = currentUser.name;
+
+                // Show dashboard, hide auth modal
+                authModal.style.display = 'none';
+                dashboard.style.display = 'block';
+
+                // Hide main website content
+                mainContentSections.forEach(el => {
+                    el.style.display = 'none';
+                });
+
+                // Show/hide features based on role
+                if (currentUser.role === 'tutor' || currentUser.role === 'admin') {
+                    studentManagementLink.style.display = 'block';
+                } else {
+                    studentManagementLink.style.display = 'none';
+                }
+
+                // Load role-specific dashboard content
+                loadDashboardContent();
+            }
+
+
+
+            function loadDashboardContent() {
+                let content = '';
+
+                if (currentUser.role === 'student') {
+                    content = `
+            <h4>Your Upcoming Sessions</h4>
+            <p>You have no upcoming sessions. <a href="#schedule" class="nav-link">Schedule one now!</a></p>
+            <h4>AI Study Assistant</h4>
+            <p>Use AI-powered tools to help with your subject practice and questions.</p>
+        `;
+                } else if (currentUser.role === 'tutor') {
+                    content = `
+            <h4>Your Schedule</h4>
+            <p>You have 3 sessions scheduled this week.</p>
+            <h4>Manage Students</h4>
+            <p>You can add, edit, or remove students.</p>
+            <h4>Pending Requests</h4>
+            <button class="btn">Accept</button>
+            <button class="btn">Reject</button>
+        `;
+                } else if (currentUser.role === 'admin') {
+                    content = `
+            <h4>System Overview</h4>
+            <p>There are 15 students and 3 tutors registered.</p>
+            <h4>Manage Users</h4>
+            <p>You can add, edit, or remove tutors and students.</p>
+            <h4>Pending Tutor Requests</h4>
+            <button class="btn">Accept</button>
+            <button class="btn">Reject</button>
+        `;
+                }
+
+                dashboardContent.innerHTML = content;
+            }
+
+            // Handle logout
+            logoutBtn.addEventListener('click', function () {
+                currentUser = null;
+                dashboard.style.display = 'none';
+
+                // Show main website content
+                mainContentSections.forEach(el => {
+                    el.style.display = 'block';
+                });
+            });
+            function loadStudentDashboard() {
+                return `
+        <h4>Your Upcoming Sessions</h4>
+        <p>You have no upcoming sessions. <a href="#schedule" class="nav-link">Schedule one now!</a></p>
+        
+        <h4>AI Study Assistant</h4>
+        <textarea id="ai-question" placeholder="Ask AI about your subject..." style="width:100%;height:80px;"></textarea>
+        <button id="ask-ai-btn" class="btn">Ask AI</button>
+        <div id="ai-response" style="margin-top:10px;color:#333;"></div>
+
+        <h4>Request a Tutor</h4>
+        <button id="request-tutor-btn" class="btn">Send Tutor Request</button>
+        <p id="request-status"></p>
+    `;
+            }
+
+            document.addEventListener("click", e => {
+                if (e.target && e.target.id === "ask-ai-btn") {
+                    const q = document.getElementById("ai-question").value;
+                    document.getElementById("ai-response").innerText = q
+                        ? "🤖 AI Response: Let’s work on this together → " + q
+                        : "Please enter a question.";
+                }
+
+                if (e.target && e.target.id === "request-tutor-btn") {
+                    document.getElementById("request-status").innerText = "Tutor request sent. Pending approval.";
+                }
+            });
+
+            //Tutor
+            function loadTutorDashboard() {
+                return `
+        <h4>Your Schedule</h4>
+        <p>You have 3 sessions scheduled this week.</p>
+        
+        <h4>Manage Students</h4>
+        <button id="add-student-btn" class="btn">Add Student</button>
+        <ul id="student-list">
+            <li>Sarah Johnson <button class="remove-student-btn">Remove</button></li>
+            <li>John Smith <button class="remove-student-btn">Remove</button></li>
+        </ul>
+
+        <h4>Pending Requests</h4>
+        <div>
+            <span>Mary Williams → Tutor Request</span>
+            <button class="accept-btn">Accept</button>
+            <button class="reject-btn">Reject</button>
+        </div>
+    `;
+            }
+
+            document.addEventListener("click", e => {
+                if (e.target && e.target.id === "add-student-btn") {
+                    const newStudent = prompt("Enter new student name:");
+                    if (newStudent) {
+                        document.getElementById("student-list").innerHTML +=
+                            `<li>${newStudent} <button class="remove-student-btn">Remove</button></li>`;
+                    }
+                }
+
+                if (e.target && e.target.classList.contains("remove-student-btn")) {
+                    e.target.parentElement.remove();
+                }
+
+                if (e.target && e.target.classList.contains("accept-btn")) {
+                    alert("✅ Student request accepted.");
+                    e.target.parentElement.style.display = "none";
+                }
+                if (e.target && e.target.classList.contains("reject-btn")) {
+                    alert("❌ Student request rejected.");
+                    e.target.parentElement.style.display = "none";
+                }
+            });
+
+            //Admin Dash
+
+            function loadAdminDashboard() {
+                return `
+        <h4>System Overview</h4>
+        <p>15 students and 3 tutors registered.</p>
+
+        <h4>Manage Tutors</h4>
+        <button id="add-tutor-btn" class="btn">Add Tutor</button>
+        <ul id="tutor-list">
+            <li>Mr Adams <button class="remove-tutor-btn">Remove</button></li>
+        </ul>
+
+        <h4>Manage Students</h4>
+        <button id="add-student-btn-admin" class="btn">Add Student</button>
+        <ul id="student-list-admin">
+            <li>Sarah Johnson <button class="remove-student-btn-admin">Remove</button></li>
+        </ul>
+
+        <h4>Pending Tutor Requests</h4>
+        <div>
+            <span>Jane Doe → Tutor Application</span>
+            <button class="accept-btn">Accept</button>
+            <button class="reject-btn">Reject</button>
+        </div>
+    `;
+            }
+
+            document.addEventListener("click", e => {
+                if (e.target && e.target.id === "add-tutor-btn") {
+                    const tutor = prompt("Enter tutor name:");
+                    if (tutor) {
+                        document.getElementById("tutor-list").innerHTML +=
+                            `<li>${tutor} <button class="remove-tutor-btn">Remove</button></li>`;
+                    }
+                }
+
+                if (e.target && e.target.classList.contains("remove-tutor-btn")) {
+                    e.target.parentElement.remove();
+                }
+
+                if (e.target && e.target.id === "add-student-btn-admin") {
+                    const student = prompt("Enter student name:");
+                    if (student) {
+                        document.getElementById("student-list-admin").innerHTML +=
+                            `<li>${student} <button class="remove-student-btn-admin">Remove</button></li>`;
+                    }
+                }
+
+                if (e.target && e.target.classList.contains("remove-student-btn-admin")) {
+                    e.target.parentElement.remove();
+                }
+            });
+
+
+            // Handle dashboard navigation
+            navLinks.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+
+                    // Update active nav link
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+
+                    // Show corresponding section
+                    dashboardSections.forEach(section => {
+                        section.classList.remove('active');
+                        if (section.id === targetId) {
+                            section.classList.add('active');
+                        }
+                    });
+                });
+            });
+
+            // Return to home page when home link is clicked
+            homeLink.addEventListener('click', function (e) {
+                if (currentUser) {
+                    e.preventDefault();
+                    dashboard.style.display = 'none';
+
+                    // Show main website content
+                    mainContentSections.forEach(el => {
+                        el.style.display = 'block';
+                    });
+
+                    // Scroll to top
+                    window.scrollTo(0, 0);
+                }
+            });
+
+            // Close modal if clicked outside of modal content
+            window.addEventListener('click', function (e) {
+                if (e.target === authModal) {
+                    authModal.style.display = 'none';
+                }
+            });
+
+            // Set current year in footer
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    if (this.getAttribute('href') !== '#') {
+                        e.preventDefault();
+                        const target = document.querySelector(this.getAttribute('href'));
+                        if (target) {
+                            target.scrollIntoView({
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                });
+            });
+
+            // Intersection Observer for fade-in animations
+            const fadeInSections = document.querySelectorAll('.fade-in');
+
+            const observerOptions = {
+                root: null, // relative to the viewport
+                rootMargin: '0px',
+                threshold: 0.1 // 10% of the section must be visible
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('appear');
+                        observer.unobserve(entry.target); // Stop observing once it's visible
+                    }
+                });
+            }, observerOptions);
+
+            fadeInSections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // Formspree AJAX Submission
+            const contactForm = document.getElementById('contact-form');
+            const formStatus = document.getElementById('form-status');
+
+            if (contactForm && formStatus) {
+                contactForm.addEventListener('submit', async function (event) {
+                    event.preventDefault(); // Prevent default browser form submission
+
+                    const form = event.target;
+                    const formData = new FormData(form); // Get form data
+                    const url = form.action; // Get the Formspree URL from the form's action attribute
+
+                    try {
+                        formStatus.textContent = 'Sending message...'; // Show a sending status
+                        formStatus.style.color = '#0056b3'; // Blue color for sending status
+
+                        const response = await fetch(url, {
+                            method: 'POST',
+                            body: formData,
+                            headers: {
+                                'Accept': 'application/json' // Crucial for Formspree to return JSON for AJAX
+                            }
+                        });
+
+                        if (response.ok) {
+                            formStatus.textContent = 'Message sent successfully! We will get back to you soon.';
+                            formStatus.style.color = '#28a745'; // Green for success
+                            form.reset(); // Clear all form fields
+                        } else {
+                            const data = await response.json(); // Parse error response from Formspree
+                            if (Object.hasOwnProperty.call(data, 'errors')) {
+                                // Display Formspree's error messages
+                                formStatus.textContent = 'Error: ' + data["errors"].map(error => error["message"]).join(", ");
+                            } else {
+                                formStatus.textContent = 'Oops! There was a problem sending your message.';
+                            }
+                            formStatus.style.color = '#dc3545'; // Red for error
+                        }
+                    } catch (error) {
+                        console.error('Form submission failed:', error);
+                        formStatus.textContent = 'An unexpected error occurred. Please try again.';
+                        formStatus.style.color = '#dc3545'; // Red for error
+                    }
+                });
+            }
+        </script>
+    </main>
+</body>
+</html>
