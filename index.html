@@ -830,6 +830,7 @@
                             { id: 'group1', tutorId: 'bob@tutor.com', module: 'Maths', topic: 'Linear Algebra Refresher', date: '2025-09-12T15:00', participants: ['student1@test.com'], maxParticipants: 5, requests: [], chat: [] },
                             { id: 'group2', tutorId: 'charlie@tutor.com', module: 'Physics', topic: 'Electromagnetism Explained', date: '2025-09-13T10:00', participants: [], maxParticipants: 3, requests: ['student2@test.com'], chat: [] }
                         ],
+                        moduleRequests: [],
                         resources: {
                             'Maths': [
                                 { title: 'Calculus Fundamentals', desc: 'A comprehensive guide to understanding basic calculus concepts.', link: 'https://www.dummies.com/article/academics-hobbies/study-guides/math/calculus/calculus-for-dummies-cheat-sheet-209749', icon: 'fas fa-book' },
@@ -864,7 +865,7 @@
                         'charlie@tutor.com': { uid: 'charlie@tutor.com', name: 'Charlie Brown', email: 'charlie@tutor.com', role: 'tutor', modules: ['Physics', 'IT'], level: 'High school level', avatar: 'C', bio: 'Specializing in mechanics and electromagnetism.', status: 'approved', documents: [] },
                         'pending.tutor@test.com': { uid: 'pending.tutor@test.com', name: 'Penelope Pending', email: 'pending.tutor@test.com', role: 'tutor', modules: ['Maths'], level: 'High school level', avatar: 'P', bio: 'Eager to start teaching.', status: 'pending', documents: ['transcript.pdf', 'qualifications.pdf'] },
                         'student1@test.com': { uid: 'student1@test.com', name: 'Sarah Johnson', email: 'student1@test.com', role: 'student', modules: ['Maths', 'IT'], level: 'Grade 11', avatar: 'S', status: 'approved', documents: [], progressNotes: 'Making great progress in calculus.' },
-                        'student2@test.com': { uid: 'student2@test.com', name: 'John Smith', email: 'student2@test.com', role: 'student', modules: ['Physics'], level: 'Grade 10', avatar: 'J', status: 'approved', documents: [], progressNotes: 'Needs to review Newtonian mechanics.' },                        'student3@test.com': { uid: 'student3@test.com', name: 'Mary Williams', email: 'student3@test.com', role: 'student', modules: ['Maths'], level: 'Grade 12', avatar: 'M', status: 'approved', documents: [] },
+                        'student2@test.com': { uid: 'student2@test.com', name: 'John Smith', email: 'student2@test.com', role: 'student', modules: ['Physics'], level: 'Grade 10', avatar: 'J', status: 'approved', documents: [], progressNotes: 'Needs to review Newtonian mechanics.' }, 'student3@test.com': { uid: 'student3@test.com', name: 'Mary Williams', email: 'student3@test.com', role: 'student', modules: ['Maths'], level: 'Grade 12', avatar: 'M', status: 'approved', documents: [] },
                         'pending.student@test.com': { uid: 'pending.student@test.com', name: 'Sam Pending', email: 'pending.student@test.com', role: 'student', modules: ['EGD'], level: 'Grade 9', avatar: 'S', status: 'pending', documents: ['results.pdf'] },
                         'mrdube@system.com': { uid: 'mrdube@system.com', name: 'Mr. Dube', email: 'mrdube@system.com', role: 'admin', avatar: 'D', status: 'approved' }
                     },
@@ -887,6 +888,7 @@
                         { id: 'group1', tutorId: 'bob@tutor.com', module: 'Maths', topic: 'Linear Algebra Refresher', date: '2025-09-12T15:00', participants: ['student1@test.com'], maxParticipants: 5 },
                         { id: 'group2', tutorId: 'charlie@tutor.com', module: 'Physics', topic: 'Electromagnetism Explained', date: '2025-09-13T10:00', participants: [], maxParticipants: 3 }
                     ],
+                    moduleRequests: [],
                     resources: {
                         'Maths': [
                             { title: 'Calculus Fundamentals', desc: 'A comprehensive guide to understanding basic calculus concepts.', link: 'https://www.dummies.com/article/academics-hobbies/study-guides/math/calculus/calculus-for-dummies-cheat-sheet-209749', icon: 'fas fa-book' },
@@ -1164,16 +1166,16 @@
                 const totalUsers = Object.keys(db.users).length;
                 const approvedTutors = Object.values(db.users).filter(u => u.role === 'tutor' && u.status === 'approved').length;
                 dashboardContent.innerHTML = `
-            <h4 class="font-['Roboto_Slab'] text-blue-950 text-xl font-bold">System Overview</h4>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-                <div class="bg-blue-100 p-4 rounded-lg shadow"><p class="text-3xl font-bold">${totalUsers}</p><p class="text-gray-700">Total Users</p></div>
-                <div class="bg-green-100 p-4 rounded-lg shadow"><p class="text-3xl font-bold">${approvedTutors}</p><p class="text-gray-700">Approved Tutors</p></div>
-                <div class="bg-red-100 p-4 rounded-lg shadow"><p class="text-3xl font-bold">${pendingUsers.length}</p><p class="text-gray-700">Pending Approvals</p></div>
-            </div>
-            <p class="mt-4 text-gray-700">
-                ${pendingUsers.length > 0 ? `You have users awaiting approval. <a href="#admin-management" class="text-blue-500 font-semibold hover:underline nav-link">Review them now.</a>` : 'No users are currently pending approval.'}
-            </p>
-        `;
+                <h4 class="font-['Roboto_Slab'] text-blue-950 text-xl font-bold">System Overview</h4>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+                    <div class="bg-blue-100 p-4 rounded-lg shadow"><p class="text-3xl font-bold">${totalUsers}</p><p class="text-gray-700">Total Users</p></div>
+                    <div class="bg-green-100 p-4 rounded-lg shadow"><p class="text-3xl font-bold">${approvedTutors}</p><p class="text-gray-700">Approved Tutors</p></div>
+                    <div class="bg-red-100 p-4 rounded-lg shadow"><p class="text-3xl font-bold">${pendingUsers.length}</p><p class="text-gray-700">Pending Approvals</p></div>
+                </div>
+                <p class="mt-4 text-gray-700">
+                    ${pendingUsers.length > 0 ? `You have users awaiting approval. <a href="#admin-management" class="text-blue-500 font-semibold hover:underline nav-link">Review them now.</a>` : 'No users are currently pending approval.'}
+                </p>
+            `;
 
             } else if (currentUser.role === 'tutor') {
                 const myStudents = db.tutorStudents[currentUser.uid] || [];
@@ -1181,36 +1183,37 @@
                 const latestAnnouncement = db.announcements && db.announcements.length > 0 ? db.announcements[db.announcements.length - 1] : "No new announcements.";
 
                 dashboardContent.innerHTML = `
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div class="lg:col-span-2 flex flex-col gap-6">
-                    <div>
-                        <h4 class="font-['Roboto_Slab'] text-blue-950 text-xl font-bold mb-4">🗓️ Your Next Sessions</h4>
-                        <div id="tutor-upcoming-sessions" class="flex flex-col gap-3"></div>
-                    </div>
-                    <div>
-                        <h4 class="font-['Roboto_Slab'] text-blue-950 text-xl font-bold mb-4">📢 Latest Announcement</h4>
-                        <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded-r-lg">
-                            <p>${latestAnnouncement}</p>
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div class="lg:col-span-2 flex flex-col gap-6">
+                        <div>
+                            <h4 class="font-['Roboto_Slab'] text-blue-950 text-xl font-bold mb-4">🗓️ Your Next Sessions</h4>
+                            <div id="tutor-upcoming-sessions" class="flex flex-col gap-3"></div>
+                        </div>
+                        <div>
+                            <h4 class="font-['Roboto_Slab'] text-blue-950 text-xl font-bold mb-4">📢 Latest Announcement</h4>
+                            <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded-r-lg">
+                                <p>${latestAnnouncement}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="lg:col-span-1 flex flex-col gap-6">
-                    <div>
-                        <h4 class="font-['Roboto_Slab'] text-blue-950 text-xl font-bold mb-4">🚀 Quick Actions</h4>
-                        <div class="flex flex-col gap-2">
-                            <a href="#schedule" class="nav-link btn bg-green-500 hover:bg-green-600 text-white text-center">Schedule Group Session</a>
-                            <a href="#resources" class="nav-link btn bg-blue-500 hover:bg-blue-600 text-white text-center">Manage Resources</a>
+                    <div class="lg:col-span-1 flex flex-col gap-6">
+                        <div>
+                            <h4 class="font-['Roboto_Slab'] text-blue-950 text-xl font-bold mb-4">🚀 Quick Actions</h4>
+                            <div class="flex flex-col gap-2">
+                                <button class="btn bg-purple-500 hover:bg-purple-600 text-white text-center" id="manage-modules-btn">Manage Modules</button>
+                                <a href="#schedule" class="nav-link btn bg-green-500 hover:bg-green-600 text-white text-center">Schedule Group Session</a>
+                                <a href="#resources" class="nav-link btn bg-blue-500 hover:bg-blue-600 text-white text-center">Manage Resources</a>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-['Roboto_Slab'] text-blue-950 text-xl font-bold mb-4">👥 Student Watchlist (${myStudents.length})</h4>
+                            <div id="tutor-student-list" class="flex flex-col gap-2"></div>
+                            <a href="#student-management" class="nav-link text-blue-500 hover:underline mt-2 inline-block">Manage All Students →</a>
                         </div>
                     </div>
-                    <div>
-                        <h4 class="font-['Roboto_Slab'] text-blue-950 text-xl font-bold mb-4">👥 Student Watchlist (${myStudents.length})</h4>
-                        <div id="tutor-student-list" class="flex flex-col gap-2"></div>
-                        <a href="#student-management" class="nav-link text-blue-500 hover:underline mt-2 inline-block">Manage All Students →</a>
-                    </div>
                 </div>
-            </div>
-        `;
+            `;
 
                 const sessionsContainer = document.getElementById('tutor-upcoming-sessions');
                 if (myUpcomingSessions.length > 0) {
@@ -1218,15 +1221,15 @@
                         const student = db.users[session.studentId];
                         const sessionDate = new Date(session.date);
                         sessionsContainer.innerHTML += `
-                    <div class="bg-gray-100 p-4 rounded-lg shadow-sm flex items-center justify-between">
-                        <div>
-                            <p class="font-bold text-gray-800">Session with ${student.name}</p>
-                            <p class="text-sm text-gray-600">${sessionDate.toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' })}</p>
-                             <p class="text-sm italic text-gray-500 mt-1">Topic: ${session.topic}</p>
+                        <div class="bg-gray-100 p-4 rounded-lg shadow-sm flex items-center justify-between">
+                            <div>
+                                <p class="font-bold text-gray-800">Session with ${student.name}</p>
+                                <p class="text-sm text-gray-600">${sessionDate.toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' })}</p>
+                                 <p class="text-sm italic text-gray-500 mt-1">Topic: ${session.topic}</p>
+                            </div>
+                             <button class="btn join-session-btn bg-blue-500 text-white text-sm py-1 px-3" data-session-id="${session.id}" data-session-type="one-on-one">Start Call</button>
                         </div>
-                         <button class="btn join-session-btn bg-blue-500 text-white text-sm py-1 px-3" data-session-id="${session.id}" data-session-type="one-on-one">Start Call</button>
-                    </div>
-                `;
+                    `;
                     });
                 } else {
                     sessionsContainer.innerHTML = `<p class="text-gray-500 p-4 bg-gray-100 rounded-lg">No upcoming sessions. Time to schedule some!</p>`;
@@ -1237,11 +1240,11 @@
                     myStudents.slice(0, 4).forEach(studentId => {
                         const student = db.users[studentId];
                         studentsContainer.innerHTML += `
-                     <div class="bg-gray-50 p-2 rounded-md flex items-center gap-3">
-                         <div class="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold text-sm">${student.avatar}</div>
-                         <span class="font-semibold text-gray-700">${student.name}</span>
-                     </div>
-                `;
+                         <div class="bg-gray-50 p-2 rounded-md flex items-center gap-3">
+                             <div class="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold text-sm">${student.avatar}</div>
+                             <span class="font-semibold text-gray-700">${student.name}</span>
+                         </div>
+                    `;
                     });
                 } else {
                     studentsContainer.innerHTML = `<p class="text-gray-500">No students assigned yet.</p>`;
@@ -1268,21 +1271,21 @@
                     const reviewCount = tutorReviews.length;
 
                     const card = `
-                                <div class="tutor-card bg-white rounded-lg shadow-md p-6 text-center transition-all duration-300 hover:scale-105">
-                                    <div class="w-24 h-24 rounded-full bg-blue-950 text-white flex items-center justify-center text-4xl font-['Roboto_Slab'] mx-auto mb-4">${tutor.avatar}</div>
-                                    <h3 class="text-xl font-bold font-['Roboto_Slab'] text-blue-950">${tutor.name}</h3>
-                                    <p class="text-blue-500 font-semibold mb-2">${tutor.modules.join(', ')} - ${tutor.level}</p>
-                                    <div class="flex items-center justify-center mb-4">
-                                        <span class="text-lg font-bold mr-2">${avgRating}</span>
-                                        <div class="text-sm">
-                                            ${getStarRatingHTML(Math.round(avgRating))}
+                                    <div class="tutor-card bg-white rounded-lg shadow-md p-6 text-center transition-all duration-300 hover:scale-105">
+                                        <div class="w-24 h-24 rounded-full bg-blue-950 text-white flex items-center justify-center text-4xl font-['Roboto_Slab'] mx-auto mb-4">${tutor.avatar}</div>
+                                        <h3 class="text-xl font-bold font-['Roboto_Slab'] text-blue-950">${tutor.name}</h3>
+                                        <p class="text-blue-500 font-semibold mb-2">${tutor.modules.join(', ')} - ${tutor.level}</p>
+                                        <div class="flex items-center justify-center mb-4">
+                                            <span class="text-lg font-bold mr-2">${avgRating}</span>
+                                            <div class="text-sm">
+                                                ${getStarRatingHTML(Math.round(avgRating))}
+                                            </div>
+                                            <span class="text-gray-500 ml-2">(${reviewCount} reviews)</span>
                                         </div>
-                                        <span class="text-gray-500 ml-2">(${reviewCount} reviews)</span>
+                                        <p class="text-gray-700 text-sm mb-4">${tutor.bio}</p>
+                                        <button class="btn book-session-btn bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg text-sm" data-tutor-id="${tutor.uid}">Book Session</button>
                                     </div>
-                                    <p class="text-gray-700 text-sm mb-4">${tutor.bio}</p>
-                                    <button class="btn book-session-btn bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg text-sm" data-tutor-id="${tutor.uid}">Book Session</button>
-                                </div>
-                            `;
+                                `;
                     tutorGrid.insertAdjacentHTML('beforeend', card);
                 });
             }
@@ -1333,68 +1336,93 @@
 
             // Analytics Cards
             let html = `
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-          <div class="bg-white p-6 rounded-lg shadow">
-            <h4 class="text-gray-700 font-bold">Total Users</h4>
-            <p class="text-2xl font-semibold text-blue-500">${totalUsers}</p>
-          </div>
-          <div class="bg-white p-6 rounded-lg shadow">
-            <h4 class="text-gray-700 font-bold">Active Tutors</h4>
-            <p class="text-2xl font-semibold text-green-500">${activeTutors}</p>
-          </div>
-          <div class="bg-white p-6 rounded-lg shadow">
-            <h4 class="text-gray-700 font-bold">Sessions This Week</h4>
-            <p class="text-2xl font-semibold text-purple-500">${sessionsThisWeek}</p>
-          </div>
-        </div>
-    `;
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+              <div class="bg-white p-6 rounded-lg shadow">
+                <h4 class="text-gray-700 font-bold">Total Users</h4>
+                <p class="text-2xl font-semibold text-blue-500">${totalUsers}</p>
+              </div>
+              <div class="bg-white p-6 rounded-lg shadow">
+                <h4 class="text-gray-700 font-bold">Active Tutors</h4>
+                <p class="text-2xl font-semibold text-green-500">${activeTutors}</p>
+              </div>
+              <div class="bg-white p-6 rounded-lg shadow">
+                <h4 class="text-gray-700 font-bold">Sessions This Week</h4>
+                <p class="text-2xl font-semibold text-purple-500">${sessionsThisWeek}</p>
+              </div>
+            </div>
+        `;
 
             // ========== User Management ==========
             html += `<h4 class="text-xl font-bold text-blue-950 mb-4">Manage Users</h4>`;
             html += `<div id="admin-user-list" class="flex flex-col gap-4">`;
 
             Object.values(db.users).forEach(user => {
-                 const documentsHtml = (user.documents && user.documents.length > 0)
+                const documentsHtml = (user.documents && user.documents.length > 0)
                     ? `<button class="btn view-docs-btn bg-gray-500 hover:bg-gray-600 text-white px-3 py-1 rounded-lg text-sm" data-user-id="${user.uid}">View Docs</button>`
                     : '';
                 html += `
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-center bg-gray-100 p-4 rounded-lg shadow-sm">
-                  <div class="mb-2 md:mb-0">
-                    <p class="font-bold">${user.name} (${user.email})</p>
-                    <p class="text-sm text-gray-600">Role: ${user.role} | Status: ${user.status}</p>
-                  </div>
-                  <div class="flex flex-wrap gap-2">
-                    ${documentsHtml}
-                    ${user.status === 'pending' ? `<button class="btn approve-btn bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded" data-user-id="${user.uid}">Approve</button><button class="btn reject-btn bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded" data-user-id="${user.uid}">Reject</button>` : ''}
-                    ${user.status === 'approved' ? `<button class="btn suspend-btn bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded" data-user-id="${user.uid}">Suspend</button>` : ''}
-                  </div>
-                </div>
-                `;
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center bg-gray-100 p-4 rounded-lg shadow-sm">
+                      <div class="mb-2 md:mb-0">
+                        <p class="font-bold">${user.name} (${user.email})</p>
+                        <p class="text-sm text-gray-600">Role: ${user.role} | Status: ${user.status}</p>
+                      </div>
+                      <div class="flex flex-wrap gap-2">
+                        ${documentsHtml}
+                        ${user.status === 'pending' ? `<button class="btn approve-btn bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded" data-user-id="${user.uid}">Approve</button><button class="btn reject-btn bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded" data-user-id="${user.uid}">Reject</button>` : ''}
+                        ${user.status === 'approved' ? `<button class="btn suspend-btn bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded" data-user-id="${user.uid}">Suspend</button>` : ''}
+                      </div>
+                    </div>
+                    `;
             });
             html += `</div>`;
 
+            // ========== Module Requests ==========
+            html += `<h4 class="text-xl font-bold text-blue-950 mt-8 mb-4">Module Requests</h4>`;
+            html += `<div id="admin-module-requests" class="flex flex-col gap-4">`;
+            if (db.moduleRequests && db.moduleRequests.length > 0) {
+                db.moduleRequests.forEach((req, index) => {
+                    const tutor = db.users[req.tutorId];
+                    html += `
+                            <div class="flex flex-col md:flex-row justify-between items-start md:items-center bg-yellow-100 p-4 rounded-lg shadow-sm">
+                                <div class="mb-2 md:mb-0">
+                                    <p><strong>${tutor.name}</strong> requests to add <strong>${req.module}</strong></p>
+                                    <p class="text-sm">Document: <em>${req.document}</em> <button class="text-blue-500 hover:underline text-sm ml-2" onclick="showAlert('This is a simulated view of ${req.document}.')">(View)</button></p>
+                                </div>
+                                <div class="flex gap-2">
+                                   <button class="btn approve-module-btn bg-green-500 text-white px-3 py-1" data-request-index="${index}">Approve</button>
+                                   <button class="btn decline-module-btn bg-red-500 text-white px-3 py-1" data-request-index="${index}">Decline</button>
+                                </div>
+                            </div>
+                        `;
+                });
+            } else {
+                html += `<p class="text-gray-500">No pending module requests.</p>`;
+            }
+            html += `</div>`;
+
+
             // ========== Tutor Assignment ==========
             html += `
-    <h4 class="text-xl font-bold text-blue-950 mt-8 mb-4">Assign Tutors to Students</h4>
-    <div class="bg-gray-100 p-4 rounded-lg">
-      <form id="tutor-assignment-form" class="flex flex-col md:flex-row gap-4">
-        <select id="student-select" class="p-3 border rounded-lg flex-1">
-          <option value="">Select Student</option>
-          ${Object.values(db.users).filter(u => u.role === 'student' && u.status === 'approved').map(s => `<option value="${s.uid}">${s.name}</option>`).join('')}
-        </select>
-        <select id="tutor-select" class="p-3 border rounded-lg flex-1">
-          <option value="">Select Tutor</option>
-          ${Object.values(db.users).filter(u => u.role === 'tutor' && u.status === 'approved').map(t => `<option value="${t.uid}">${t.name}</option>`).join('')}
-        </select>
-        <button type="submit" class="btn bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg">Assign</button>
-      </form>
-      <div id="assignment-list" class="mt-4 text-sm text-gray-700">
-        ${Object.entries(db.tutorStudents).map(([tutorId, students]) => {
+        <h4 class="text-xl font-bold text-blue-950 mt-8 mb-4">Assign Tutors to Students</h4>
+        <div class="bg-gray-100 p-4 rounded-lg">
+          <form id="tutor-assignment-form" class="flex flex-col md:flex-row gap-4">
+            <select id="student-select" class="p-3 border rounded-lg flex-1">
+              <option value="">Select Student</option>
+              ${Object.values(db.users).filter(u => u.role === 'student' && u.status === 'approved').map(s => `<option value="${s.uid}">${s.name}</option>`).join('')}
+            </select>
+            <select id="tutor-select" class="p-3 border rounded-lg flex-1">
+              <option value="">Select Tutor</option>
+              ${Object.values(db.users).filter(u => u.role === 'tutor' && u.status === 'approved').map(t => `<option value="${t.uid}">${t.name}</option>`).join('')}
+            </select>
+            <button type="submit" class="btn bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg">Assign</button>
+          </form>
+          <div id="assignment-list" class="mt-4 text-sm text-gray-700">
+            ${Object.entries(db.tutorStudents).map(([tutorId, students]) => {
                 const tutor = db.users[tutorId];
                 return `<p><strong>${tutor.name}</strong> → ${students.map(sid => db.users[sid]?.name).join(', ')}</p>`;
             }).join('')}
-      </div>
-    </div>`;
+          </div>
+        </div>`;
 
             // ========== Sessions ==========
             html += `<h4 class="text-xl font-bold text-blue-950 mt-8 mb-4">Scheduled Sessions</h4>`;
@@ -1403,13 +1431,13 @@
                 const student = db.users[s.studentId];
                 const tutor = db.users[s.tutorId];
                 html += `
-        <div class="flex justify-between items-center bg-gray-100 p-3 rounded-lg shadow-sm">
-          <span><strong>Student:</strong> ${student?.name} | <strong>Tutor:</strong> ${tutor?.name} | <strong>Date:</strong> ${s.date}</span>
-          <div class="flex gap-2">
-            <button class="btn cancel-session bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded" data-session-id="${s.id}">Cancel</button>
-          </div>
-        </div>
-        `;
+            <div class="flex justify-between items-center bg-gray-100 p-3 rounded-lg shadow-sm">
+              <span><strong>Student:</strong> ${student?.name} | <strong>Tutor:</strong> ${tutor?.name} | <strong>Date:</strong> ${s.date}</span>
+              <div class="flex gap-2">
+                <button class="btn cancel-session bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded" data-session-id="${s.id}">Cancel</button>
+              </div>
+            </div>
+            `;
             });
             html += `</div>`;
 
@@ -1420,25 +1448,25 @@
                 const reviewer = db.users[r.reviewerId];
                 const reviewed = db.users[r.reviewedId];
                 html += `
-        <div class="flex justify-between items-center bg-gray-100 p-3 rounded-lg shadow-sm">
-          <span><strong>${reviewer?.name}</strong> → ${reviewed?.name}: ${r.rating}★ "${r.comment}"</span>
-          <button class="btn delete-review bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded" data-review-index="${i}">Delete</button>
-        </div>
-        `;
+            <div class="flex justify-between items-center bg-gray-100 p-3 rounded-lg shadow-sm">
+              <span><strong>${reviewer?.name}</strong> → ${reviewed?.name}: ${r.rating}★ "${r.comment}"</span>
+              <button class="btn delete-review bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded" data-review-index="${i}">Delete</button>
+            </div>
+            `;
             });
             html += `</div>`;
 
             // ========== Announcements ==========
             html += `
-    <h4 class="text-xl font-bold text-blue-950 mt-8 mb-4">Announcements</h4>
-    <form id="announcement-form" class="flex flex-col md:flex-row gap-4 mb-4">
-      <input type="text" id="announcement-input" placeholder="Write announcement..." class="p-3 border rounded-lg flex-1">
-      <button type="submit" class="btn bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-lg">Post</button>
-    </form>
-    <div id="announcement-list" class="flex flex-col gap-2 text-sm text-gray-700">
-      ${(db.announcements || []).map(a => `<div class="bg-gray-100 p-3 rounded-lg shadow-sm">📢 ${a}</div>`).join('')}
-    </div>
-    `;
+        <h4 class="text-xl font-bold text-blue-950 mt-8 mb-4">Announcements</h4>
+        <form id="announcement-form" class="flex flex-col md:flex-row gap-4 mb-4">
+          <input type="text" id="announcement-input" placeholder="Write announcement..." class="p-3 border rounded-lg flex-1">
+          <button type="submit" class="btn bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-lg">Post</button>
+        </form>
+        <div id="announcement-list" class="flex flex-col gap-2 text-sm text-gray-700">
+          ${(db.announcements || []).map(a => `<div class="bg-gray-100 p-3 rounded-lg shadow-sm">📢 ${a}</div>`).join('')}
+        </div>
+        `;
 
             adminContent.innerHTML = html;
 
@@ -1524,7 +1552,7 @@
 
             const myUpcomingOneOnOne = db.sessions.filter(s => s.studentId === currentUser.uid && new Date(s.date) > now);
             const myUpcomingGroup = db.groupSessions.filter(gs => gs.participants.includes(currentUser.uid) && new Date(gs.date) > now);
-            const allMyUpcoming = [...myUpcomingOneOnOne, ...myUpcomingGroup].sort((a,b) => new Date(a.date) - new Date(b.date));
+            const allMyUpcoming = [...myUpcomingOneOnOne, ...myUpcomingGroup].sort((a, b) => new Date(a.date) - new Date(b.date));
             const nextSession = allMyUpcoming[0];
 
             const myPastSession = db.sessions
@@ -1536,11 +1564,11 @@
 
             // --- HTML TEMPLATES ---
             let upcomingSessionHtml = `
-        <div class="bg-gray-100 p-6 rounded-lg text-center">
-            <i class="fas fa-calendar-check text-4xl text-gray-400 mb-3"></i>
-            <h5 class="font-bold text-lg text-gray-800">No Upcoming Sessions</h5>
-            <p class="text-gray-600">Use the 'Schedule' tab to find a class!</p>
-        </div>`;
+            <div class="bg-gray-100 p-6 rounded-lg text-center">
+                <i class="fas fa-calendar-check text-4xl text-gray-400 mb-3"></i>
+                <h5 class="font-bold text-lg text-gray-800">No Upcoming Sessions</h5>
+                <p class="text-gray-600">Use the 'Schedule' tab to find a class!</p>
+            </div>`;
 
             if (nextSession) {
                 const tutor = db.users[nextSession.tutorId];
@@ -1548,18 +1576,18 @@
                 const isGroupSession = !!nextSession.participants;
 
                 upcomingSessionHtml = `
-            <div class="bg-blue-500 text-white p-6 rounded-lg shadow-xl">
-                <div class="flex justify-between items-center">
-                    <div>
-                        <p class="text-sm opacity-80">YOUR NEXT SESSION IS</p>
-                        <h5 class="font-bold text-2xl">${sessionDate.toLocaleDateString([], { weekday: 'long', month: 'long', day: 'numeric' })}</h5>
-                        <p class="font-semibold">${sessionDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} with ${tutor.name}</p>
-                        <p class="font-semibold mt-1 text-blue-200">${isGroupSession ? 'Group Session' : 'One-on-One'}: ${nextSession.topic}</p>
+                <div class="bg-blue-500 text-white p-6 rounded-lg shadow-xl">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <p class="text-sm opacity-80">YOUR NEXT SESSION IS</p>
+                            <h5 class="font-bold text-2xl">${sessionDate.toLocaleDateString([], { weekday: 'long', month: 'long', day: 'numeric' })}</h5>
+                            <p class="font-semibold">${sessionDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} with ${tutor.name}</p>
+                            <p class="font-semibold mt-1 text-blue-200">${isGroupSession ? 'Group Session' : 'One-on-One'}: ${nextSession.topic}</p>
+                        </div>
+                        <i class="fas fa-arrow-right text-2xl opacity-50"></i>
                     </div>
-                    <i class="fas fa-arrow-right text-2xl opacity-50"></i>
-                </div>
-                 <button class="w-full mt-4 btn bg-white text-blue-500 hover:bg-gray-200 font-bold join-session-btn" data-session-id="${nextSession.id}" data-session-type="${isGroupSession ? 'group' : 'one-on-one'}">Join Session</button>
-            </div>`;
+                     <button class="w-full mt-4 btn bg-white text-blue-500 hover:bg-gray-200 font-bold join-session-btn" data-session-id="${nextSession.id}" data-session-type="${isGroupSession ? 'group' : 'one-on-one'}">Join Session</button>
+                </div>`;
             }
 
             let myTutorsHtml = '<p class="text-sm text-gray-500">You are not yet assigned to a tutor.</p>';
@@ -1567,16 +1595,16 @@
                 myTutorsHtml = myTutorIds.map(tutorId => {
                     const tutor = db.users[tutorId];
                     return `
-                <div class="bg-gray-100 p-3 rounded-lg flex items-center justify-between">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-full bg-blue-950 text-white flex items-center justify-center font-bold">${tutor.avatar}</div>
-                        <div>
-                            <p class="font-semibold text-gray-800">${tutor.name}</p>
-                            <p class="text-xs text-gray-500">${tutor.modules.join(', ')}</p>
+                    <div class="bg-gray-100 p-3 rounded-lg flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-blue-950 text-white flex items-center justify-center font-bold">${tutor.avatar}</div>
+                            <div>
+                                <p class="font-semibold text-gray-800">${tutor.name}</p>
+                                <p class="text-xs text-gray-500">${tutor.modules.join(', ')}</p>
+                            </div>
                         </div>
-                    </div>
-                    <button class="btn bg-blue-500 text-white text-xs py-1 px-3 message-user-btn" data-user-id="${tutor.uid}">Message</button>
-                </div>`;
+                        <button class="btn bg-blue-500 text-white text-xs py-1 px-3 message-user-btn" data-user-id="${tutor.uid}">Message</button>
+                    </div>`;
                 }).join('');
             }
 
@@ -1586,47 +1614,51 @@
                 const alreadyReviewed = db.reviews.some(r => r.reviewerId === currentUser.uid && r.reviewedId === tutorToReview.uid);
                 if (!alreadyReviewed) {
                     reviewPromptHtml = `
-                <div>
-                    <h4 class="text-xl font-bold mb-3 text-gray-700">⭐ Rate Your Last Session</h4>
-                    <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded-r-lg flex justify-between items-center">
-                        <div>
-                            <p class="font-bold">How was your session with ${tutorToReview.name}?</p>
-                            <p>Your feedback helps us improve!</p>
+                    <div>
+                        <h4 class="text-xl font-bold mb-3 text-gray-700">⭐ Rate Your Last Session</h4>
+                        <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded-r-lg flex justify-between items-center">
+                            <div>
+                                <p class="font-bold">How was your session with ${tutorToReview.name}?</p>
+                                <p>Your feedback helps us improve!</p>
+                            </div>
+                            <button class="btn bg-green-500 text-white font-bold py-1 px-3" onclick="document.querySelector('a[href=\\'#reviews\\']').click()">Rate Now</button>
                         </div>
-                        <button class="btn bg-green-500 text-white font-bold py-1 px-3" onclick="document.querySelector('a[href=\\'#reviews\\']').click()">Rate Now</button>
-                    </div>
-                </div>`;
+                    </div>`;
                 }
             }
 
             // --- FINAL ASSEMBLY ---
             studentDashboard.innerHTML = `
-        <h3 class="text-3xl font-bold font-['Roboto_Slab'] text-blue-950 mb-6">Welcome back, ${currentUser.name.split(' ')[0]}!</h3>
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <div class="flex flex-col gap-6">
-                <div>
-                    <h4 class="text-xl font-bold mb-3 text-gray-700">What's Next?</h4>
-                    ${upcomingSessionHtml}
-                </div>
-                <div>
-                    <h4 class="text-xl font-bold mb-3 text-gray-700">Your Tutors</h4>
-                    <div class="flex flex-col gap-3">
-                       ${myTutorsHtml}
+            <h3 class="text-3xl font-bold font-['Roboto_Slab'] text-blue-950 mb-6">Welcome back, ${currentUser.name.split(' ')[0]}!</h3>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="flex flex-col gap-6">
+                    <div>
+                        <h4 class="text-xl font-bold mb-3 text-gray-700">What's Next?</h4>
+                        ${upcomingSessionHtml}
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-bold mb-3 text-gray-700">Your Tutors</h4>
+                        <div class="flex flex-col gap-3">
+                           ${myTutorsHtml}
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="flex flex-col gap-6">
-                ${reviewPromptHtml}
-                <div>
-                    <h4 class="text-xl font-bold mb-3 text-gray-700">📢 Announcements</h4>
-                     <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded-r-lg">
-                        <p>${latestAnnouncement}</p>
+                <div class="flex flex-col gap-6">
+                    ${reviewPromptHtml}
+                     <div>
+                        <h4 class="font-['Roboto_Slab'] text-blue-950 text-xl font-bold mb-4">🚀 Quick Actions</h4>
+                         <button class="btn bg-purple-500 hover:bg-purple-600 text-white text-center w-full" id="manage-modules-btn">Manage Modules</button>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-bold mb-3 text-gray-700">📢 Announcements</h4>
+                         <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded-r-lg">
+                            <p>${latestAnnouncement}</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    `
+        `
         }
 
 
@@ -1643,16 +1675,16 @@
             }
 
             const cardsHtml = students.map(student => `
-                        <div class="student-card bg-gray-100 p-6 rounded-lg shadow-md text-center">
-                            <div class="w-20 h-20 rounded-full bg-blue-500 text-white text-3xl flex items-center justify-center mx-auto mb-4">${student.avatar}</div>
-                            <h4 class="font-bold text-blue-950">${student.name}</h4>
-                            <p class="text-sm text-gray-600">${student.level} - ${student.modules.join(', ')}</p>
-                            <div class="mt-4 flex justify-center gap-2">
-                                <button class="student-btn remove-student-btn bg-red-500 hover:bg-red-600 text-white text-xs py-2 px-4 rounded-md" data-student-id="${student.uid}">Remove</button>
-                                <button class="student-btn message-student-btn bg-blue-500 hover:bg-blue-600 text-white text-xs py-2 px-4 rounded-md" data-student-id="${student.uid}">Message</button>
+                            <div class="student-card bg-gray-100 p-6 rounded-lg shadow-md text-center">
+                                <div class="w-20 h-20 rounded-full bg-blue-500 text-white text-3xl flex items-center justify-center mx-auto mb-4">${student.avatar}</div>
+                                <h4 class="font-bold text-blue-950">${student.name}</h4>
+                                <p class="text-sm text-gray-600">${student.level} - ${student.modules.join(', ')}</p>
+                                <div class="mt-4 flex justify-center gap-2">
+                                    <button class="student-btn remove-student-btn bg-red-500 hover:bg-red-600 text-white text-xs py-2 px-4 rounded-md" data-student-id="${student.uid}">Remove</button>
+                                    <button class="student-btn message-student-btn bg-blue-500 hover:bg-blue-600 text-white text-xs py-2 px-4 rounded-md" data-student-id="${student.uid}">Message</button>
+                                </div>
                             </div>
-                        </div>
-                    `).join('');
+                        `).join('');
             studentsGrid.innerHTML = cardsHtml;
         }
 
@@ -1696,58 +1728,58 @@
                 const tutorUpcomingList = document.getElementById('tutor-upcoming-list');
                 const mySessions = db.sessions.filter(s => s.tutorId === currentUser.uid && new Date(s.date) > now);
                 const myGroupSessions = db.groupSessions.filter(s => s.tutorId === currentUser.uid && new Date(s.date) > now);
-                const allMyUpcomingSessions = [...mySessions, ...myGroupSessions].sort((a,b) => new Date(a.date) - new Date(b.date));
+                const allMyUpcomingSessions = [...mySessions, ...myGroupSessions].sort((a, b) => new Date(a.date) - new Date(b.date));
 
                 if (allMyUpcomingSessions.length > 0) {
                     tutorUpcomingList.innerHTML = '<div class="flex flex-col gap-3">' + allMyUpcomingSessions.map(s => {
-                         const sessionDate = new Date(s.date).toLocaleString();
-                         if(s.studentId) { // One-on-one
+                        const sessionDate = new Date(s.date).toLocaleString();
+                        if (s.studentId) { // One-on-one
                             const student = db.users[s.studentId];
                             return `<div class="bg-white p-4 rounded-lg shadow-sm">
-                                        <p class="font-bold text-blue-950">1-on-1 with ${student.name}</p>
-                                        <p class="text-sm font-semibold text-gray-800">Topic: ${s.topic || 'N/A'}</p>
-                                        <p class="text-sm text-gray-700">${sessionDate}</p>
-                                        <div class="mt-2 flex gap-2">
-                                            <button class="btn join-session-btn bg-blue-500 text-white text-xs py-1 px-3" data-session-id="${s.id}" data-session-type="one-on-one">Start Call</button>
-                                            <button class="btn cancel-session-btn bg-red-500 text-white text-xs py-1 px-3" data-session-id="${s.id}" data-type="one-on-one">Cancel</button>
-                                        </div>
-                                    </div>`;
-                         } else { // Group
+                                            <p class="font-bold text-blue-950">1-on-1 with ${student.name}</p>
+                                            <p class="text-sm font-semibold text-gray-800">Topic: ${s.topic || 'N/A'}</p>
+                                            <p class="text-sm text-gray-700">${sessionDate}</p>
+                                            <div class="mt-2 flex gap-2">
+                                                <button class="btn join-session-btn bg-blue-500 text-white text-xs py-1 px-3" data-session-id="${s.id}" data-session-type="one-on-one">Start Call</button>
+                                                <button class="btn cancel-session-btn bg-red-500 text-white text-xs py-1 px-3" data-session-id="${s.id}" data-type="one-on-one">Cancel</button>
+                                            </div>
+                                        </div>`;
+                        } else { // Group
                             return `<div class="bg-white p-4 rounded-lg shadow-sm">
-                                        <p class="font-bold text-blue-950">Group: ${s.topic}</p>
-                                        <p class="text-sm text-gray-700">${sessionDate} (${s.participants.length}/${s.maxParticipants} joined)</p>
-                                         <div class="mt-2 flex gap-2">
-                                            <button class="btn join-session-btn bg-blue-500 text-white text-xs py-1 px-3" data-session-id="${s.id}" data-session-type="group">Start Call</button>
-                                            <button class="btn cancel-session-btn bg-red-500 text-white text-xs py-1 px-3" data-session-id="${s.id}" data-type="group">Cancel</button>
-                                        </div>
-                                    </div>`;
-                         }
+                                            <p class="font-bold text-blue-950">Group: ${s.topic}</p>
+                                            <p class="text-sm text-gray-700">${sessionDate} (${s.participants.length}/${s.maxParticipants} joined)</p>
+                                             <div class="mt-2 flex gap-2">
+                                                <button class="btn join-session-btn bg-blue-500 text-white text-xs py-1 px-3" data-session-id="${s.id}" data-session-type="group">Start Call</button>
+                                                <button class="btn cancel-session-btn bg-red-500 text-white text-xs py-1 px-3" data-session-id="${s.id}" data-type="group">Cancel</button>
+                                            </div>
+                                        </div>`;
+                        }
                     }).join('') + '</div>';
                 } else {
-                     tutorUpcomingList.innerHTML = `<p class="text-gray-500 p-4">No upcoming sessions.</p>`
+                    tutorUpcomingList.innerHTML = `<p class="text-gray-500 p-4">No upcoming sessions.</p>`
                 }
 
                 // Render pending requests for tutor
                 const pendingRequestsList = document.getElementById('pending-requests-list');
                 const myPendingRequests = db.groupSessions.flatMap(gs =>
                     gs.tutorId === currentUser.uid ?
-                    (gs.requests || []).map(studentId => ({...gs, studentId}))
-                    : []
+                        (gs.requests || []).map(studentId => ({ ...gs, studentId }))
+                        : []
                 );
 
                 if (myPendingRequests.length > 0) {
                     pendingRequestsList.innerHTML = myPendingRequests.map(req => {
                         const student = db.users[req.studentId];
                         return `<div class="bg-yellow-100 p-3 rounded-lg flex justify-between items-center">
-                                    <span><strong>${student.name}</strong> wants to join "<strong>${req.topic}</strong>"</span>
-                                    <div>
-                                        <button class="btn approve-request-btn bg-green-500 text-white text-xs py-1 px-2" data-session-id="${req.id}" data-student-id="${req.studentId}">Approve</button>
-                                        <button class="btn decline-request-btn bg-red-500 text-white text-xs py-1 px-2" data-session-id="${req.id}" data-student-id="${req.studentId}">Decline</button>
-                                    </div>
-                                </div>`;
+                                        <span><strong>${student.name}</strong> wants to join "<strong>${req.topic}</strong>"</span>
+                                        <div>
+                                            <button class="btn approve-request-btn bg-green-500 text-white text-xs py-1 px-2" data-session-id="${req.id}" data-student-id="${req.studentId}">Approve</button>
+                                            <button class="btn decline-request-btn bg-red-500 text-white text-xs py-1 px-2" data-session-id="${req.id}" data-student-id="${req.studentId}">Decline</button>
+                                        </div>
+                                    </div>`;
                     }).join('');
                 } else {
-                     pendingRequestsList.innerHTML = `<p class="text-gray-500">No pending requests.</p>`;
+                    pendingRequestsList.innerHTML = `<p class="text-gray-500">No pending requests.</p>`;
                 }
 
 
@@ -1763,8 +1795,8 @@
                 const myGroup = db.groupSessions.filter(gs => gs.participants.includes(currentUser.uid));
                 const allMySessions = [...myOneOnOne, ...myGroup];
 
-                const upcoming = allMySessions.filter(s => new Date(s.date) > now).sort((a,b) => new Date(a.date) - new Date(b.date));
-                const past = allMySessions.filter(s => new Date(s.date) <= now).sort((a,b) => new Date(b.date) - new Date(a.date));
+                const upcoming = allMySessions.filter(s => new Date(s.date) > now).sort((a, b) => new Date(a.date) - new Date(b.date));
+                const past = allMySessions.filter(s => new Date(s.date) <= now).sort((a, b) => new Date(b.date) - new Date(a.date));
 
                 // Render upcoming sessions
                 if (upcoming.length > 0) {
@@ -1773,14 +1805,14 @@
                         const sessionDate = new Date(s.date).toLocaleString();
                         const isGroup = !!s.participants;
                         return `<div class="bg-gray-200 p-4 rounded-lg shadow-sm">
-                                    <p class="font-bold text-blue-950">${isGroup ? 'Group' : '1-on-1'} with ${tutor.name}</p>
-                                    <p class="text-sm font-semibold text-gray-800">Topic: ${s.topic || 'N/A'}</p>
-                                    <p class="text-sm text-gray-700">${sessionDate}</p>
-                                    <div class="mt-2 flex gap-2">
-                                        <button class="btn join-session-btn bg-blue-500 text-white text-xs py-1 px-3" data-session-id="${s.id}" data-session-type="${isGroup ? 'group' : 'one-on-one'}">Join Call</button>
-                                        ${!isGroup ? `<button class="btn cancel-session-btn bg-red-500 text-white text-xs py-1 px-3" data-session-id="${s.id}" data-type="one-on-one">Cancel</button>` : ''}
-                                    </div>
-                                </div>`;
+                                        <p class="font-bold text-blue-950">${isGroup ? 'Group' : '1-on-1'} with ${tutor.name}</p>
+                                        <p class="text-sm font-semibold text-gray-800">Topic: ${s.topic || 'N/A'}</p>
+                                        <p class="text-sm text-gray-700">${sessionDate}</p>
+                                        <div class="mt-2 flex gap-2">
+                                            <button class="btn join-session-btn bg-blue-500 text-white text-xs py-1 px-3" data-session-id="${s.id}" data-session-type="${isGroup ? 'group' : 'one-on-one'}">Join Call</button>
+                                            ${!isGroup ? `<button class="btn cancel-session-btn bg-red-500 text-white text-xs py-1 px-3" data-session-id="${s.id}" data-type="one-on-one">Cancel</button>` : ''}
+                                        </div>
+                                    </div>`;
                     }).join('') + '</div>';
                 } else {
                     upcomingList.innerHTML = `<p class="text-gray-500 p-4">No upcoming sessions.</p>`;
@@ -1789,14 +1821,14 @@
                 // Render past sessions
                 if (past.length > 0) {
                     pastList.innerHTML = '<div class="flex flex-col gap-3">' + past.map(s => {
-                         const tutor = db.users[s.tutorId];
+                        const tutor = db.users[s.tutorId];
                         const sessionDate = new Date(s.date).toLocaleString();
                         const isGroup = !!s.participants;
-                         return `<div class="bg-gray-200 p-4 rounded-lg shadow-sm opacity-70">
-                                    <p class="font-bold text-blue-950">${isGroup ? 'Group' : '1-on-1'} with ${tutor.name}</p>
-                                    <p class="text-sm font-semibold text-gray-800">Topic: ${s.topic || 'N/A'}</p>
-                                    <p class="text-sm text-gray-700">${sessionDate}</p>
-                                </div>`;
+                        return `<div class="bg-gray-200 p-4 rounded-lg shadow-sm opacity-70">
+                                        <p class="font-bold text-blue-950">${isGroup ? 'Group' : '1-on-1'} with ${tutor.name}</p>
+                                        <p class="text-sm font-semibold text-gray-800">Topic: ${s.topic || 'N/A'}</p>
+                                        <p class="text-sm text-gray-700">${sessionDate}</p>
+                                    </div>`;
                     }).join('') + '</div>';
                 } else {
                     pastList.innerHTML = `<p class="text-gray-500 p-4">No past sessions.</p>`;
@@ -1808,17 +1840,17 @@
 
                 if (availableGroupSessions.length > 0) {
                     availableGroupList.innerHTML = availableGroupSessions.map(s => {
-                         const tutor = db.users[s.tutorId];
-                         return `<div class="bg-white p-4 rounded-lg shadow">
-                                    <h5 class="font-bold text-blue-950">${s.topic}</h5>
-                                    <p class="text-sm text-gray-600">with ${tutor.name}</p>
-                                    <p class="text-sm text-gray-600">${new Date(s.date).toLocaleString()}</p>
-                                    <p class="text-sm text-gray-600">${s.participants.length}/${s.maxParticipants} spots filled</p>
-                                    <button class="btn request-join-btn mt-2 w-full bg-blue-500 text-white text-sm py-1" data-session-id="${s.id}">Request to Join</button>
-                                </div>`;
+                        const tutor = db.users[s.tutorId];
+                        return `<div class="bg-white p-4 rounded-lg shadow">
+                                        <h5 class="font-bold text-blue-950">${s.topic}</h5>
+                                        <p class="text-sm text-gray-600">with ${tutor.name}</p>
+                                        <p class="text-sm text-gray-600">${new Date(s.date).toLocaleString()}</p>
+                                        <p class="text-sm text-gray-600">${s.participants.length}/${s.maxParticipants} spots filled</p>
+                                        <button class="btn request-join-btn mt-2 w-full bg-blue-500 text-white text-sm py-1" data-session-id="${s.id}">Request to Join</button>
+                                    </div>`;
                     }).join('');
                 } else {
-                     availableGroupList.innerHTML = `<p class="text-gray-500 col-span-full">No new group sessions available to join.</p>`
+                    availableGroupList.innerHTML = `<p class="text-gray-500 col-span-full">No new group sessions available to join.</p>`
                 }
             }
         }
@@ -1858,12 +1890,12 @@
                 }
 
                 contactEl.innerHTML = `
-                            <div class="flex items-center gap-4">
-                                <div class="w-10 h-10 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold">${user.avatar}</div>
-                                <div>${user.name}</div>
-                            </div>
-                            ${unreadBadge}
-                        `;
+                                <div class="flex items-center gap-4">
+                                    <div class="w-10 h-10 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold">${user.avatar}</div>
+                                    <div>${user.name}</div>
+                                </div>
+                                ${unreadBadge}
+                            `;
 
                 contactEl.addEventListener('click', () => {
                     currentChatPartner = user;
@@ -1875,10 +1907,10 @@
                     const chatHeaderButtons = document.getElementById('chat-header-buttons');
                     if (currentUser.role === 'student' && currentChatPartner.role === 'tutor') {
                         chatHeaderButtons.innerHTML = `
-                            <button class="btn join-session-btn bg-blue-500 text-white text-xs py-1 px-2" data-session-type="one-on-one" data-tutor-id="${currentChatPartner.uid}">Start Video Call</button>
-                            <button class="btn leave-review-btn bg-green-500 text-white text-xs py-1 px-2">Leave a Review</button>`;
+                                <button class="btn join-session-btn bg-blue-500 text-white text-xs py-1 px-2" data-session-type="one-on-one" data-tutor-id="${currentChatPartner.uid}">Start Video Call</button>
+                                <button class="btn leave-review-btn bg-green-500 text-white text-xs py-1 px-2">Leave a Review</button>`;
                     } else {
-                         chatHeaderButtons.innerHTML = '';
+                        chatHeaderButtons.innerHTML = '';
                     }
                     // Clear unread count for this chat
                     if (db.unreadCounts[chatKey]) {
@@ -1932,7 +1964,7 @@
             relevantSessions.forEach(session => {
                 // Prevent duplicates if a tutor is somehow also a participant
                 if (!userGroups.some(g => g.id === session.id)) {
-                     userGroups.push({
+                    userGroups.push({
                         id: session.id,
                         name: `Session: ${session.topic}`,
                         isSession: true,
@@ -1943,8 +1975,8 @@
 
             // 4. Render all collected groups
             if (userGroups.length === 0) {
-                 groupChatContactsContainer.innerHTML = `<p class="p-4 text-sm text-gray-500">No group chats available.</p>`;
-                 return;
+                groupChatContactsContainer.innerHTML = `<p class="p-4 text-sm text-gray-500">No group chats available.</p>`;
+                return;
             }
 
             userGroups.forEach(group => {
@@ -1954,11 +1986,11 @@
                 groupEl.dataset.isSession = group.isSession;
 
                 groupEl.innerHTML = `
-                    <div class="flex items-center gap-4">
-                        <div class="w-10 h-10 rounded-full bg-purple-500 text-white flex items-center justify-center font-bold"><i class="${group.icon}"></i></div>
-                        <div>${group.name}</div>
-                    </div>
-                `;
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-full bg-purple-500 text-white flex items-center justify-center font-bold"><i class="${group.icon}"></i></div>
+                            <div>${group.name}</div>
+                        </div>
+                    `;
 
                 groupEl.addEventListener('click', () => {
                     currentChatPartner = { uid: group.id, name: group.name, isGroup: true, isSession: group.isSession };
@@ -2036,7 +2068,7 @@
 
             if (currentChatPartner.isGroup) {
                 const groupId = currentChatPartner.uid;
-                 if (currentChatPartner.isSession) {
+                if (currentChatPartner.isSession) {
                     const session = db.groupSessions.find(s => s.id === groupId);
                     if (session) {
                         if (!session.chat) session.chat = [];
@@ -2226,9 +2258,9 @@
             if (!session || !session.chat) return;
 
             if (session.chat.length === 0) {
-                 display.innerHTML = `<p class="text-center text-gray-500 mt-5 text-sm">Welcome to the session chat!</p>`;
+                display.innerHTML = `<p class="text-center text-gray-500 mt-5 text-sm">Welcome to the session chat!</p>`;
             } else {
-                 session.chat.forEach(msg => {
+                session.chat.forEach(msg => {
                     const isSent = msg.senderId === currentUser.uid;
                     const sender = db.users[msg.senderId];
                     const messageDiv = document.createElement('div');
@@ -2250,10 +2282,10 @@
 
         function sendSessionChatMessage(e) {
             e.preventDefault();
-             if (!currentSessionContext || currentSessionContext.type !== 'group') return;
+            if (!currentSessionContext || currentSessionContext.type !== 'group') return;
             const input = document.getElementById('session-chat-input');
             const messageText = input.value.trim();
-            if(!messageText) return;
+            if (!messageText) return;
 
             const session = db.groupSessions.find(s => s.id === currentSessionContext.id);
             if (session) {
@@ -2400,17 +2432,17 @@
                 const moduleResources = db.resources[module] || [];
                 moduleResources.forEach(resource => {
                     resourcesHTML += `
-                            <div class="resource-card bg-gray-100 rounded-lg overflow-hidden shadow-md hover:translate-y-[-5px] transition-transform duration-300">
-                                <div class="h-40 bg-gray-300 flex items-center justify-center">
-                                    <i class="${resource.icon} text-5xl text-gray-500"></i>
+                                <div class="resource-card bg-gray-100 rounded-lg overflow-hidden shadow-md hover:translate-y-[-5px] transition-transform duration-300">
+                                    <div class="h-40 bg-gray-300 flex items-center justify-center">
+                                        <i class="${resource.icon} text-5xl text-gray-500"></i>
+                                    </div>
+                                    <div class="p-4">
+                                        <div class="font-semibold text-lg text-blue-950">${resource.title}</div>
+                                        <div class="text-sm text-gray-600 mt-1">${resource.desc}</div>
+                                        <a href="${resource.link}" class="inline-block mt-4 text-blue-500 font-semibold hover:underline" target="_blank">View Resource</a>
+                                    </div>
                                 </div>
-                                <div class="p-4">
-                                    <div class="font-semibold text-lg text-blue-950">${resource.title}</div>
-                                    <div class="text-sm text-gray-600 mt-1">${resource.desc}</div>
-                                    <a href="${resource.link}" class="inline-block mt-4 text-blue-500 font-semibold hover:underline" target="_blank">View Resource</a>
-                                </div>
-                            </div>
-                            `;
+                                `;
                 });
             });
 
@@ -2478,47 +2510,47 @@
                 if (role === 'tutor') {
                     roleSpecificSignupSection.classList.remove('hidden');
                     roleSpecificSignupSection.innerHTML = `
-                                <p class="text-sm text-gray-600 mb-2 font-semibold">Select the modules you teach:</p>
-                                <div class="flex flex-wrap gap-4 mb-4">
-                                    ${modulesList.map(module => `<label class="inline-flex items-center"><input type="checkbox" name="modules" value="${module}" class="form-checkbox"><span class="ml-2">${module}</span></label>`).join('')}
-                                </div>
-                                <p class="text-sm text-gray-600 mb-2 font-semibold">Select your teaching level:</p>
-                                <select id="tutor-level" required class="w-full p-3 border border-gray-300 rounded-lg bg-white mb-4">
-                                    <option value="">Select level...</option>
-                                    <option value="High school level">High school level</option>
-                                    <option value="Varsity level">Varsity level</option>
-                                    <option value="Both">Both</option>
-                                </select>
-                                <p class="text-sm text-gray-600 mb-2 font-semibold">Please upload your documents:</p>
-                                <div class="mb-2">
-                                    <label for="user-documents" class="block text-sm font-medium text-gray-700">Transcript, Qualifications & Results</label>
-                                    <input type="file" id="user-documents" multiple required class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"/>
-                                </div>
-                            `;
+                                    <p class="text-sm text-gray-600 mb-2 font-semibold">Select the modules you teach:</p>
+                                    <div class="flex flex-wrap gap-4 mb-4">
+                                        ${modulesList.map(module => `<label class="inline-flex items-center"><input type="checkbox" name="modules" value="${module}" class="form-checkbox"><span class="ml-2">${module}</span></label>`).join('')}
+                                    </div>
+                                    <p class="text-sm text-gray-600 mb-2 font-semibold">Select your teaching level:</p>
+                                    <select id="tutor-level" required class="w-full p-3 border border-gray-300 rounded-lg bg-white mb-4">
+                                        <option value="">Select level...</option>
+                                        <option value="High school level">High school level</option>
+                                        <option value="Varsity level">Varsity level</option>
+                                        <option value="Both">Both</option>
+                                    </select>
+                                    <p class="text-sm text-gray-600 mb-2 font-semibold">Please upload your documents:</p>
+                                    <div class="mb-2">
+                                        <label for="user-documents" class="block text-sm font-medium text-gray-700">Transcript, Qualifications & Results</label>
+                                        <input type="file" id="user-documents" multiple required class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"/>
+                                    </div>
+                                `;
                 } else if (role === 'student') {
                     roleSpecificSignupSection.classList.remove('hidden');
                     roleSpecificSignupSection.innerHTML = `
-                                <p class="text-sm text-gray-600 mb-2 font-semibold">Select the modules you need help with:</p>
-                                <div class="flex flex-wrap gap-4 mb-4">
-                                    ${modulesList.map(module => `<label class="inline-flex items-center"><input type="checkbox" name="modules" value="${module}" class="form-checkbox"><span class="ml-2">${module}</span></label>`).join('')}
-                                </div>
-                                <p class="text-sm text-gray-600 mb-2 font-semibold">Select your grade level:</p>
-                                <select id="student-level" required class="w-full p-3 border border-gray-300 rounded-lg bg-white mb-4">
-                                    <option value="">Select level...</option>
-                                    <option value="Grade 9">Grade 9</option>
-                                    <option value="Grade 10">Grade 10</option>
-                                    <option value="Grade 11">Grade 11</option>
-                                    <option value="Grade 12">Grade 12</option>
-                                    <option value="University - 1st Year">University - 1st Year</option>
-                                    <option value="University - 2nd Year">University - 2nd Year</option>
-                                    <option value="University - 3rd Year">University - 3rd Year</option>
-                                </select>
-                                <p class="text-sm text-gray-600 mb-2 font-semibold">Please upload your documents:</p>
-                                <div class="mb-2">
-                                    <label for="user-documents" class="block text-sm font-medium text-gray-700">Previous Academic Results</label>
-                                    <input type="file" id="user-documents" required class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"/>
-                                </div>
-                            `;
+                                    <p class="text-sm text-gray-600 mb-2 font-semibold">Select the modules you need help with:</p>
+                                    <div class="flex flex-wrap gap-4 mb-4">
+                                        ${modulesList.map(module => `<label class="inline-flex items-center"><input type="checkbox" name="modules" value="${module}" class="form-checkbox"><span class="ml-2">${module}</span></label>`).join('')}
+                                    </div>
+                                    <p class="text-sm text-gray-600 mb-2 font-semibold">Select your grade level:</p>
+                                    <select id="student-level" required class="w-full p-3 border border-gray-300 rounded-lg bg-white mb-4">
+                                        <option value="">Select level...</option>
+                                        <option value="Grade 9">Grade 9</option>
+                                        <option value="Grade 10">Grade 10</option>
+                                        <option value="Grade 11">Grade 11</option>
+                                        <option value="Grade 12">Grade 12</option>
+                                        <option value="University - 1st Year">University - 1st Year</option>
+                                        <option value="University - 2nd Year">University - 2nd Year</option>
+                                        <option value="University - 3rd Year">University - 3rd Year</option>
+                                    </select>
+                                    <p class="text-sm text-gray-600 mb-2 font-semibold">Please upload your documents:</p>
+                                    <div class="mb-2">
+                                        <label for="user-documents" class="block text-sm font-medium text-gray-700">Previous Academic Results</label>
+                                        <input type="file" id="user-documents" required class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"/>
+                                    </div>
+                                `;
                 } else {
                     roleSpecificSignupSection.classList.add('hidden');
                 }
@@ -2672,7 +2704,7 @@
                 } else if (e.target.classList.contains('decline-request-btn')) {
                     const { sessionId, studentId } = e.target.dataset;
                     const session = db.groupSessions.find(s => s.id === sessionId);
-                     if (session) {
+                    if (session) {
                         session.requests = session.requests.filter(id => id !== studentId);
                         saveState();
                         showAlert('Request declined.');
@@ -2683,14 +2715,14 @@
                         id: e.target.dataset.sessionId,
                         type: e.target.dataset.sessionType,
                     };
-                     if(e.target.dataset.tutorId) { // From chat header, find the session
+                    if (e.target.dataset.tutorId) { // From chat header, find the session
                         const now = new Date();
                         const upcomingSession = db.sessions.find(s => s.studentId === currentUser.uid && s.tutorId === e.target.dataset.tutorId && new Date(s.date) > now);
-                        if(upcomingSession) {
-                           currentSessionContext.id = upcomingSession.id;
+                        if (upcomingSession) {
+                            currentSessionContext.id = upcomingSession.id;
                         } else {
-                           showAlert("No upcoming session with this tutor. Please schedule one first.");
-                           return;
+                            showAlert("No upcoming session with this tutor. Please schedule one first.");
+                            return;
                         }
                     }
                     document.querySelector('a[href="#video-call"]').click();
@@ -2711,10 +2743,10 @@
                         docsModalUser.textContent = `Showing documents for: ${user.name}`;
                         docsList.innerHTML = user.documents.map(doc =>
                             `<div class="bg-gray-100 p-3 rounded-lg flex items-center gap-3">
-                                <i class="fas fa-file-alt text-gray-500"></i>
-                                <span class="font-semibold text-gray-700">${doc}</span>
-                                <a href="#" class="ml-auto text-blue-500 hover:underline text-sm" onclick="event.preventDefault(); showAlert('This is a simulated document view.')">View</a>
-                            </div>`
+                                    <i class="fas fa-file-alt text-gray-500"></i>
+                                    <span class="font-semibold text-gray-700">${doc}</span>
+                                    <a href="#" class="ml-auto text-blue-500 hover:underline text-sm" onclick="event.preventDefault(); showAlert('This is a simulated document view.')">View</a>
+                                </div>`
                         ).join('');
                         docsModal.classList.add('flex');
                     } else {
@@ -2725,7 +2757,7 @@
 
             // Handle event delegation for the "Leave a Review" button
             document.getElementById('chat-header-buttons').addEventListener('click', (e) => {
-                if(e.target.classList.contains('leave-review-btn')) {
+                if (e.target.classList.contains('leave-review-btn')) {
                     if (currentChatPartner && currentChatPartner.role === 'tutor') {
                         reviewModalUser.textContent = `You are reviewing: ${currentChatPartner.name}`;
                         reviewModal.classList.add('flex');
@@ -2783,6 +2815,7 @@
             // Chat input listener
             document.getElementById('chat-input-form').addEventListener('submit', sendMessage);
             document.getElementById('session-chat-form').addEventListener('submit', sendSessionChatMessage);
+            document.getElementById('ai-input-form').addEventListener('submit', sendAITutorMessage);
 
 
             // Video call listeners
@@ -2813,25 +2846,25 @@
 
                 const sessionType = document.getElementById('session-type').value;
                 if (sessionType === 'one-on-one') {
-                        const studentId = document.getElementById('schedule-student-select').value;
-                        const topic = document.getElementById('one-on-one-topic').value;
-                        const notes = document.getElementById('tutor-schedule-notes').value;
-                        if(!studentId) { showAlert("Please select a student."); return; }
-                        if(!topic) { showAlert("Please enter a topic."); return; }
+                    const studentId = document.getElementById('schedule-student-select').value;
+                    const topic = document.getElementById('one-on-one-topic').value;
+                    const notes = document.getElementById('tutor-schedule-notes').value;
+                    if (!studentId) { showAlert("Please select a student."); return; }
+                    if (!topic) { showAlert("Please enter a topic."); return; }
 
-                        const conflict = db.sessions.find(s => s.date === proposedDateTime && (s.tutorId === currentUser.uid || s.studentId === studentId));
-                        if(conflict) { showAlert('A session is already scheduled at this time for you or the selected student.'); return; }
+                    const conflict = db.sessions.find(s => s.date === proposedDateTime && (s.tutorId === currentUser.uid || s.studentId === studentId));
+                    if (conflict) { showAlert('A session is already scheduled at this time for you or the selected student.'); return; }
 
-                        db.sessions.push({ id: `sess${Date.now()}`, studentId, tutorId: currentUser.uid, date: proposedDateTime, topic, notes });
-                        showAlert('One-on-one session scheduled!');
+                    db.sessions.push({ id: `sess${Date.now()}`, studentId, tutorId: currentUser.uid, date: proposedDateTime, topic, notes });
+                    showAlert('One-on-one session scheduled!');
 
                 } else { // Group session
                     const topic = document.getElementById('group-topic').value;
                     const maxParticipants = document.getElementById('max-participants').value;
-                    if(!topic) { showAlert("Please enter a topic for the group session."); return; }
+                    if (!topic) { showAlert("Please enter a topic for the group session."); return; }
 
-                        db.groupSessions.push({ id: `group${Date.now()}`, tutorId: currentUser.uid, topic, date: proposedDateTime, maxParticipants, participants: [], requests: [], chat: [] });
-                        showAlert('Group session created!');
+                    db.groupSessions.push({ id: `group${Date.now()}`, tutorId: currentUser.uid, topic, date: proposedDateTime, maxParticipants, participants: [], requests: [], chat: [] });
+                    showAlert('Group session created!');
                 }
 
                 saveState();
@@ -2864,8 +2897,8 @@
             const buttonsHTML = seededEmails.map(email => {
                 const user = db.users[email];
                 return `<button class="seeded-login-btn btn bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded-full text-sm" data-email="${user.email}" title="${user.email}">
-                            ${user.name.split(' ')[0]} (${user.role})
-                        </button>`;
+                                ${user.name.split(' ')[0]} (${user.role})
+                            </button>`;
             }).join('');
             container.innerHTML = buttonsHTML;
         }
@@ -2874,4 +2907,5 @@
     </script>
 </body>
 </html>
+
 
